@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>障がい者グループホーム「いせっちハウス」｜川崎市多摩区</title>
+    <!-- 検索エンジンによるインデックスを防止 -->
+    <meta name="robots" content="noindex, nofollow">
+    <!-- ファビコン（ブックマークアイコン） -->
+    <link rel="icon" type="image/png" href="ロゴ/にわとりA_透過.png">
+    <link rel="apple-touch-icon" href="ロゴ/にわとりA_透過.png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef5ff',   // 薄い青
+                            100: '#dbeafe',  // 淡い青
+                            200: '#93c5fd',  // 中間青
+                            500: '#3b82f6',  // 明るい青
+                            700: '#0854AA',  // メイン青（ロゴの青）
+                            800: '#054596',  // 濃い青
+                            900: '#043882',  // 最も濃い青
+                        },
+                        warm: {
+                            50: '#f8fafc',   // 背景色（白に近い）
+                            100: '#f1f5f9',
+                            800: '#1e293b',  // テキスト色
+                        },
+                        accent: {
+                            yellow: '#F5C108', // ロゴの黄色
+                            gold:   '#E8A800',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        heading: ['"Zen Maru Gothic"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Noto Sans JP', sans-serif; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3 { font-family: 'Zen Maru Gothic', sans-serif; }
+        
+        /* スクロール時のフェードインアニメーション */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, visibility;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* セクションのスクロール位置調整 */
+        section[id] { scroll-margin-top: 80px; }
+
+        /* 入居フローステップの線 */
+        .step-connector::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: 100%;
+            height: 2px;
+            background: #e5e7eb;
+            z-index: 0;
+            transform: translateY(-50%);
+        }
+        @media (max-width: 768px) {
+            .step-connector::after {
+                top: 100%;
+                left: 50%;
+                width: 2px;
+                height: 30px;
+                transform: translateX(-50%);
+            }
+        }
+        /* スクロールバー非表示 */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* ドット絵イラスト画像の表示スタイル */
+        .pixel-illust {
+            image-rendering: auto;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(77,124,15,0.12), 0 2px 8px rgba(0,0,0,0.07);
+        }
+        .pixel-illust img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* サービスカードのイラストエリア */
+        .service-illust {
+            width: 100%;
+            height: 180px;
+            border-radius: 1rem 1rem 0 0;
+            overflow: hidden;
+            margin: -2rem -2rem 1.5rem -2rem;
+            width: calc(100% + 4rem);
+        }
+        .service-illust img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 暖かみのある手書き風装飾ライン */
+        .warm-underline {
+            position: relative;
+            display: inline-block;
+        }
+        .warm-underline::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 100%;
+            height: 6px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10'%3E%3Cpath d='M0 7 Q 25 2 50 7 Q 75 12 100 7' stroke='%23F5C108' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
+            background-size: 100% 100%;
+        }
+
+        /* ヒーロー装飾（ぷかぷか浮遊） */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+        .float-anim {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* SVGウェーブ区切り */
+        .section-wave {
+            display: block;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        .section-wave svg {
+            display: block;
+            width: 100%;
+        }
+
+        /* 背景ドットパターン（白ドット on 青背景）: ヒーロー用 */
+        .bg-dots {
+            background-image: radial-gradient(circle, rgba(255,255,255,0.22) 1.5px, transparent 1.5px);
+            background-size: 22px 22px;
+        }
+
+        /* ドットパターン（青ドット on 薄青背景）: 白/薄青セクション用 */
+        .bg-dots-blue {
+            background-image: radial-gradient(circle, rgba(8,84,170,0.12) 1.5px, transparent 1.5px);
+            background-size: 20px 20px;
+        }
+
+        /* ヒーロー右側イラスト枠 */
+        .hero-illust-frame {
+            border-radius: 2rem;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25), 0 4px 12px rgba(0,0,0,0.12);
+            background: transparent;
+        }
+
+        /* 各雲に少し違うタイミングのfloat */
+        .float-anim-slow { animation: float 7s ease-in-out infinite; }
+        .float-anim-mid  { animation: float 5.5s ease-in-out infinite; animation-delay: 1.2s; }
+        .float-anim-fast { animation: float 4s ease-in-out infinite; animation-delay: 0.6s; }
+
+        /* 雲コンテナ（各セクションの飾り雲） */
+        .cloud-deco {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.6;
+        }
+        .cloud-deco img { width: 100%; height: 100%; object-fit: contain; }
+
+        /* セクション内の相対配置を保証 */
+        .has-clouds { position: relative; overflow: hidden; }
+
+        /* ヒーロー内テキスト（青背景用） */
+        .hero-tag {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #ffffff;
+        }
+
+        /* ===== ニワトリ・ひよこ ウォーキングアニメーション ===== */
+        /* --- ニワトリ --- */
+        #chicken-walker {
+            position: fixed;
+            bottom: 24px;
+            left: 0;
+            z-index: 9998;
+            pointer-events: none;
+            transform: translateX(110vw);
+            will-change: transform;
+        }
+        #chicken-walker.walking-right-to-left {
+            animation: chickenMoveRTL 11s linear forwards;
+        }
+        #chicken-walker.walking-left-to-right {
+            animation: chickenMoveLTR 11s linear forwards;
+        }
+        #chicken-inner {
+            animation: none;
+        }
+        #chicken-walker.walking-right-to-left #chicken-inner,
+        #chicken-walker.walking-left-to-right #chicken-inner {
+            animation: chickenBob 0.35s ease-in-out infinite;
+        }
+        #chicken-walker.walking-right-to-left #chicken-img {
+            animation: chickenWaddleRTL 0.35s ease-in-out infinite;
+            transform-origin: center bottom;
+        }
+        #chicken-walker.walking-left-to-right #chicken-img {
+            animation: chickenWaddleLTR 0.35s ease-in-out infinite;
+            transform-origin: center bottom;
+            transform: scaleX(-1);
+        }
+        @keyframes chickenMoveRTL {
+            0%   { transform: translateX(110vw); }
+            100% { transform: translateX(-160px); }
+        }
+        @keyframes chickenMoveLTR {
+            0%   { transform: translateX(-160px); }
+            100% { transform: translateX(110vw); }
+        }
+        @keyframes chickenBob {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-10px); }
+        }
+        @keyframes chickenWaddleRTL {
+            0%, 100% { transform: rotate(-6deg) scaleX(1); }
+            50%       { transform: rotate(6deg) scaleX(1); }
+        }
+        @keyframes chickenWaddleLTR {
+            0%, 100% { transform: rotate(6deg) scaleX(-1); }
+            50%       { transform: rotate(-6deg) scaleX(-1); }
+        }
+
+        /* --- ひよこ --- */
+        #hiyoko-walker {
+            position: fixed;
+            bottom: 24px;
+            left: 0;
+            z-index: 9997;
+            pointer-events: none;
+            transform: translateX(110vw);
+            will-change: transform;
+        }
+        #hiyoko-walker.hiyoko-rtl { animation: hiyokoMoveRTL 5s linear forwards; }
+        #hiyoko-walker.hiyoko-ltr { animation: hiyokoMoveLTR 5s linear forwards; }
+        #hiyoko-walker.hiyoko-rtl #hiyoko-inner,
+        #hiyoko-walker.hiyoko-ltr #hiyoko-inner {
+            animation: hiyokoBob 0.12s ease-in-out infinite;
+        }
+        #hiyoko-walker.hiyoko-rtl #hiyoko-img {
+            animation: hiyokoWaddleRTL 0.12s ease-in-out infinite;
+            transform-origin: center bottom;
+        }
+        #hiyoko-walker.hiyoko-ltr #hiyoko-img {
+            animation: hiyokoWaddleLTR 0.12s ease-in-out infinite;
+            transform-origin: center bottom;
+            transform: scaleX(-1);
+        }
+        @keyframes hiyokoMoveRTL {
+            0%   { transform: translateX(110vw); }
+            100% { transform: translateX(-100px); }
+        }
+        @keyframes hiyokoMoveLTR {
+            0%   { transform: translateX(-100px); }
+            100% { transform: translateX(110vw); }
+        }
+        @keyframes hiyokoBob {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-5px); }
+        }
+        @keyframes hiyokoWaddleRTL {
+            0%, 100% { transform: rotate(-6deg) scaleX(1); }
+            50%       { transform: rotate(6deg) scaleX(1); }
+        }
+        @keyframes hiyokoWaddleLTR {
+            0%, 100% { transform: rotate(6deg) scaleX(-1); }
+            50%       { transform: rotate(-6deg) scaleX(-1); }
+        }
+
+        /* warm-underline を白色に */
+        .warm-underline::after {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10'%3E%3Cpath d='M0 7 Q 25 2 50 7 Q 75 12 100 7' stroke='%23F5C108' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
+            background-size: 100% 100%;
+        }
+
+    </style>
+</head>
+<body class="bg-warm-50 text-warm-800">
+
+    <!-- ナビゲーションバー -->
+    <header class="fixed w-full top-0 z-50 bg-brand-800 border-b border-brand-900 shadow-md h-20" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+            <div class="flex justify-between items-center h-full">
+                <!-- ロゴエリア -->
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="flex items-center group">
+                    <img src="ロゴ/いせっちハウス_グループホーム_一行_透過.png"
+                         alt="いせっちハウス"
+                         class="h-14 w-auto object-contain group-hover:opacity-90 transition"
+                         style="max-width: 280px;">
+                </a>
+
+                <!-- デスクトップメニュー -->
+                <nav class="hidden md:flex items-center space-x-1">
+                    <button onclick="scrollToId('concept')" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">いせっちハウス</button>
+                    <button onclick="scrollToId('locations')" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">事業所</button>
+                    <button onclick="scrollToId('service')" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">いせっちハウスの暮らし</button>
+                    <button onclick="scrollToId('flow')" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">入居の流れ</button>
+                    <button onclick="scrollToId('price')" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">料金</button>
+                    <button onclick="scrollToId('faq')" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">よくある質問</button>
+                    <!-- 追加: 採用情報リンク -->
+                    <a href="recruit.html" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">採用情報</a>
+
+                    <button onclick="scrollToId('contact')" class="ml-4 px-5 py-2.5 rounded-full text-sm font-bold shadow-md hover:opacity-90 hover:shadow-lg transition transform hover:-translate-y-0.5 flex items-center gap-2" style="background-color:#F5C108; color:#043882;">
+                        <i class="fa-regular fa-envelope"></i> お問い合わせ
+                    </button>
+                </nav>
+
+                <!-- モバイルメニューボタン（ハンバーガー） -->
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-white hover:text-yellow-200 p-2 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl" id="menuIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- モバイルメニュードロップダウン -->
+        <div id="mobileMenu" class="hidden md:hidden bg-brand-800 border-t border-brand-700 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <button onclick="mobileScrollTo('concept')" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">いせっちハウス</button>
+                <button onclick="mobileScrollTo('locations')" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">事業所</button>
+                <button onclick="mobileScrollTo('service')" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">いせっちハウスの暮らし</button>
+                <button onclick="mobileScrollTo('flow')" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">入居までの流れ</button>
+                <button onclick="mobileScrollTo('price')" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">ご利用料金</button>
+                <button onclick="mobileScrollTo('faq')" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">よくある質問</button>
+                <!-- 追加: モバイル用採用情報リンク -->
+                <a href="recruit.html" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">採用情報</a>
+
+                <button onclick="mobileScrollTo('contact')" class="block w-full text-center mt-4 px-3 py-4 text-base font-bold rounded-xl shadow-md" style="background-color:#F5C108; color:#043882;">
+                    お問い合わせ・見学予約
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ヒーローセクション -->
+    <section class="relative min-h-[88vh] flex items-center justify-center overflow-hidden pt-24 pb-16" style="background-color: #0854AA;">
+        <!-- 背景：青のドットパターン -->
+        <div class="absolute inset-0 z-0 bg-dots"></div>
+        <!-- 背景装飾：左上ぼかし -->
+        <div class="absolute top-0 left-0 w-[50vw] h-[50vh] rounded-full opacity-20 pointer-events-none" style="background: radial-gradient(circle, #3b82f6, transparent); z-index:0;"></div>
+        <!-- 背景装飾：右下ぼかし -->
+        <div class="absolute bottom-0 right-0 w-[40vw] h-[40vh] rounded-full opacity-15 pointer-events-none" style="background: radial-gradient(circle, #0a3d8a, transparent); z-index:0;"></div>
+
+        <!-- ヒーロー全体の雲（大胆に全面レイアウト） -->
+        <img src="ロゴ/cloud_08.png" alt="" class="absolute pointer-events-none float-anim-slow"
+             style="width:640px; top:-30px; right:-60px; opacity:0.50; z-index:2; animation-duration:7s;">
+        <img src="ロゴ/cloud_05.png" alt="" class="absolute pointer-events-none float-anim-mid"
+             style="width:460px; top:50px; left:-40px; opacity:0.28; z-index:2; animation-duration:9s; animation-delay:1s;">
+        <img src="ロゴ/cloud_04.png" alt="" class="absolute pointer-events-none float-anim-fast"
+             style="width:400px; bottom:100px; right:40px; opacity:0.42; z-index:2; animation-duration:6s; animation-delay:2s;">
+        <img src="ロゴ/cloud_01.png" alt="" class="absolute pointer-events-none float-anim-slow"
+             style="width:240px; bottom:60px; left:80px; opacity:0.32; z-index:2; animation-duration:8s; animation-delay:3s;">
+        <img src="ロゴ/cloud_06.png" alt="" class="absolute pointer-events-none float-anim-mid"
+             style="width:180px; top:42%; left:28%; opacity:0.22; z-index:2; animation-duration:5s; animation-delay:1.5s;">
+        <img src="ロゴ/cloud_03.png" alt="" class="absolute pointer-events-none float-anim-fast"
+             style="width:320px; top:28%; right:22%; opacity:0.32; z-index:2; animation-duration:6.5s; animation-delay:0.5s;">
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 w-full">
+            <div class="flex flex-col items-center text-center fade-in-section is-visible">
+
+                <!-- ロゴ画像（2行・クロップ版） -->
+                <div class="mb-10 w-full">
+                    <img src="ロゴ/いせっちハウス_グループホーム_改行_透過_crop.png"
+                         alt="障がい者グループホーム いせっちハウス"
+                         class="h-auto object-contain mx-auto"
+                         style="width: 100%; max-width: 688px;">
+                </div>
+                <p class="text-lg md:text-xl text-blue-100 mb-12 leading-relaxed font-medium">
+                    <span class="block whitespace-nowrap">いせっちハウスは、●●エリアを拠点とした障がい者グループホームです。</span>
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="scrollToId('contact')" class="px-8 py-4 rounded-full text-lg font-bold shadow-xl hover:opacity-90 transition hover:-translate-y-1" style="background-color:#F5C108; color:#043882;">
+                        見学・相談を予約する
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 下部波形区切り（青→薄青） -->
+        <div class="section-wave absolute bottom-0 left-0 w-full z-10">
+            <svg viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                <path d="M0 35 Q 360 0 720 35 Q 1080 70 1440 35 L1440 70 L0 70 Z" fill="#eef5ff"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- コンセプト (Our Philosophy) -->
+    <section id="concept" class="pt-12 pb-24 bg-brand-50 bg-dots-blue fade-in-section relative overflow-hidden">
+        <!-- 雲デコレーション -->
+        <!-- cloud_08 → cloud_04 に変更。右端高め・小さめにして文字との被りを解消 -->
+        <img src="ロゴ/cloud_04.png" alt="" class="absolute pointer-events-none float-anim-slow"
+             style="width:340px; top:-20px; right:-80px; opacity:0.22; z-index:0;">
+        <img src="ロゴ/cloud_06.png" alt="" class="absolute pointer-events-none float-anim-mid"
+             style="width:130px; bottom:30px; left:10px; opacity:0.38; z-index:0;">
+        <img src="ロゴ/cloud_03.png" alt="" class="absolute pointer-events-none float-anim-fast"
+             style="width:200px; top:35%; left:-20px; opacity:0.22; z-index:0;">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="relative">
+                    <div class="aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl relative z-10 bg-gradient-to-br from-brand-100 to-stone-100">
+                        <img src="images/illust-home.png" alt="いせっちハウス外観イメージ"
+                             class="w-full h-full object-cover"
+                             onerror="this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center text-brand-700 p-8 text-center\'><div><i class=\'fa-solid fa-house-chimney text-6xl mb-4 opacity-60\'></i><p class=\'font-bold text-sm\'>写真準備中</p></div></div>'">
+                    </div>
+                    <!-- 装飾 -->
+                    <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-brand-100 rounded-full mix-blend-multiply filter blur-xl opacity-70"></div>
+                    <div class="absolute -top-6 -right-6 w-32 h-32 bg-orange-100 rounded-full mix-blend-multiply filter blur-xl opacity-70"></div>
+                </div>
+                
+                <div>
+                    <span class="text-brand-700 font-bold tracking-widest text-xs uppercase mb-3 block">🍃 Our Philosophy</span>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">「住居」＋「家族」＋「暖かい食事」<br>３つがそろって、はじめて家になる。</h2>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        いせっちハウスは、みなさんの安心感と幸せにこだわります。清潔でプライバシーが確保された個室と、手作りの暖かい食事。そして私たちは、障がいをお持ちの皆さんに家族のように寄り添い、生活のサポートをいたします。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ウェーブ区切り: コンセプト→拠点 -->
+    <div class="section-wave bg-brand-50" style="margin-bottom:-2px;">
+        <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="60">
+            <path d="M0 0 Q 720 60 1440 0 L1440 60 L0 60 Z" fill="#dbeafe"/>
+        </svg>
+    </div>
+
+    <!-- 運営グループホーム一覧 (Locations) スライド形式 -->
+    <section id="locations" class="py-24 bg-brand-100 bg-dots-blue fade-in-section overflow-hidden relative">
+        <!-- 雲デコレーション -->
+        <img src="ロゴ/cloud_04.png" alt="" class="absolute pointer-events-none float-anim-slow"
+             style="width:260px; top:-20px; left:20px; opacity:0.28; z-index:0;">
+        <img src="ロゴ/cloud_06.png" alt="" class="absolute pointer-events-none float-anim-fast"
+             style="width:160px; bottom:20px; right:20px; opacity:0.35; z-index:0;">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900 font-heading">運営グループホーム</h2>
+
+            </div>
+
+            <!-- 拠点カード（現在1件のみ表示・中央寄せ） -->
+            <div class="flex justify-center">
+
+                    <!-- 拠点1: 男性棟（準備中） -->
+                    <div class="w-full max-w-[400px] bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+                        <div class="h-56 overflow-hidden relative bg-gradient-to-br from-brand-100 to-stone-100 flex items-center justify-center">
+                            <div class="text-center text-brand-700">
+                                <i class="fa-solid fa-house text-5xl mb-2 opacity-50"></i>
+                                <p class="text-xs font-bold">写真準備中</p>
+                            </div>
+                            <div class="absolute bottom-0 left-0 bg-brand-700 text-white text-xs px-3 py-1 rounded-tr-lg">男性棟</div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">いせっちハウス稲城長沼</h3>
+                            <p class="text-sm text-gray-500 mb-4"><i class="fa-solid fa-location-dot mr-1"></i> 東京都稲城市東長沼</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">戸建て</span>
+                                <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">定員4名</span>
+                                <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">駅徒歩5分</span>
+                            </div>
+                            <a href="./inagi_naganuma.html" class="block w-full text-center bg-brand-50 text-brand-700 border border-brand-200 py-3 rounded-xl font-bold hover:bg-brand-700 hover:text-white transition">
+                                詳細を見る
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 拠点2: 女性棟（追加準備中 ― 公開時は下のコメントを外してください） -->
+                    <!--
+                    <div class="w-full max-w-[400px] bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+                        <div class="h-56 overflow-hidden relative bg-gradient-to-br from-orange-50 to-stone-100 flex items-center justify-center">
+                            <div class="text-center text-orange-400">
+                                <i class="fa-solid fa-house text-5xl mb-2 opacity-50"></i>
+                                <p class="text-xs font-bold">写真準備中</p>
+                            </div>
+                            <div class="absolute bottom-0 left-0 bg-orange-500 text-white text-xs px-3 py-1 rounded-tr-lg">女性棟</div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">いせっちハウス南山</h3>
+                            <p class="text-sm text-gray-500 mb-4"><i class="fa-solid fa-location-dot mr-1"></i> 東京都稲城市南山</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">新築戸建て</span>
+                                <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">定員5名</span>
+                                <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">眺望良好</span>
+                            </div>
+                            <a href="./minamiyama.html" class="block w-full text-center bg-brand-50 text-brand-700 border border-brand-200 py-3 rounded-xl font-bold hover:bg-brand-700 hover:text-white transition">
+                                詳細を見る
+                            </a>
+                        </div>
+                    </div>
+                    -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ウェーブ区切り: 拠点→サービス -->
+    <div class="section-wave bg-brand-100" style="margin-bottom:-2px;">
+        <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="60">
+            <path d="M0 30 Q 360 60 720 30 Q 1080 0 1440 30 L1440 60 L0 60 Z" fill="#eef5ff"/>
+        </svg>
+    </div>
+
+    <!-- サービス (Service) -->
+    <section id="service" class="py-24 bg-brand-50 bg-dots-blue fade-in-section relative overflow-hidden">
+        <!-- 雲デコレーション -->
+        <img src="ロゴ/cloud_10.png" alt="" class="absolute pointer-events-none float-anim-mid"
+             style="width:280px; top:-20px; left:-30px; opacity:0.25; z-index:0;">
+        <img src="ロゴ/cloud_03.png" alt="" class="absolute pointer-events-none float-anim-fast"
+             style="width:160px; bottom:10px; left:50%; opacity:0.20; z-index:0; transform:translateX(-50%);">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900 font-heading">いせっちハウスの暮らし</h2>
+
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-3xl shadow-sm hover:shadow-xl transition duration-300 group overflow-hidden">
+                    <!-- イラスト -->
+                    <div class="h-48 overflow-hidden bg-white flex items-center justify-center p-2">
+                        <img src="ロゴ/カレーとサラダ.png" alt="食事のイラスト"
+                             class="w-full h-full object-contain group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-3 text-brand-900">食事にこだわっています！</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            <strong style="text-decoration: underline; text-decoration-color: #F5C108; text-decoration-thickness: 2px; text-underline-offset: 4px;">手作りで家庭的な、「旬」を意識したお食事を提供します。</strong>一緒に作ったり、リクエストを受けたり、ご飯の時間は毎日の楽しみ♪糖質と塩分は少し控えめ、タンパク質と野菜を多くすることを心がけます。
+                        </p>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-3xl shadow-sm hover:shadow-xl transition duration-300 group overflow-hidden">
+                    <!-- イラスト -->
+                    <div class="h-48 overflow-hidden bg-white flex items-end justify-center p-2">
+                        <img src="ロゴ/チューリップ.png" alt="自由な時間のイラスト"
+                             class="h-full object-contain group-hover:scale-105 transition duration-500"
+                             style="max-height: 75%">
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-3 text-brand-900">「自分らしさ」をサポート</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            一緒に暮らすなかでのルールはありますが、<strong style="text-decoration: underline; text-decoration-color: #F5C108; text-decoration-thickness: 2px; text-underline-offset: 4px;">基本は自由です。</strong>部屋での動画視聴、スタッフと一緒に料理、みんなでゲームなど、空いた時間は気ままに過ごしましょう。
+                        </p>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white rounded-3xl shadow-sm hover:shadow-xl transition duration-300 group overflow-hidden">
+                    <!-- イラスト -->
+                    <div class="h-48 overflow-hidden bg-white flex items-center justify-center p-2">
+                        <img src="ロゴ/洗濯物.png" alt="自律支援のイラスト"
+                             class="w-full h-full object-contain group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-3 text-brand-900">「自律→自立」を応援します</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            役所の手続き、スマホ料金プランの相談、金銭管理、家事のやり方など、『<strong style="text-decoration: underline; text-decoration-color: #F5C108; text-decoration-thickness: 2px; text-underline-offset: 4px;">できることは自分で、できないことは出来るように。</strong>』一人ひとりの個性に合わせた支援をいたします。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ウェーブ区切り: サービス→フロー -->
+    <div class="section-wave bg-brand-50" style="margin-bottom:-2px;">
+        <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="60">
+            <path d="M0 60 Q 360 0 720 40 Q 1080 70 1440 20 L1440 60 L0 60 Z" fill="#dbeafe"/>
+        </svg>
+    </div>
+
+    <!-- 入居までの流れ (Flow) -->
+    <section id="flow" class="py-24 bg-brand-100 bg-dots-blue fade-in-section relative overflow-hidden">
+        <!-- 雲デコレーション -->
+        <img src="ロゴ/cloud_08.png" alt="" class="absolute pointer-events-none float-anim-slow"
+             style="width:380px; top:-25px; right:-20px; opacity:0.28; z-index:0;">
+        <img src="ロゴ/cloud_05.png" alt="" class="absolute pointer-events-none float-anim-mid"
+             style="width:280px; bottom:20px; left:10px; opacity:0.30; z-index:0;">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900 font-heading">入居までの流れ</h2>
+                <p class="text-gray-500 text-sm">まずはお気軽にご連絡ください！</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-stretch">
+                <!-- Step 1 -->
+                <div class="relative text-center group flex flex-col">
+                    <div class="step-connector w-full h-full absolute top-0 left-0 hidden md:block"></div>
+                    <div class="relative z-10 bg-white p-6 rounded-3xl shadow-sm border border-gray-100 flex-1 flex flex-col">
+                        <div class="w-16 h-16 mx-auto bg-brand-700 text-white rounded-full flex items-center justify-center text-xl font-bold mb-4 shadow-lg group-hover:scale-110 transition shrink-0">1</div>
+                        <h3 class="font-bold text-lg mb-2">お問い合わせ</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">お電話またはメールフォームよりご連絡ください。</p>
+                    </div>
+                </div>
+                <!-- Step 2 -->
+                <div class="relative text-center group flex flex-col">
+                    <div class="step-connector w-full h-full absolute top-0 left-0 hidden md:block"></div>
+                    <div class="relative z-10 bg-white p-6 rounded-3xl shadow-sm border border-gray-100 flex-1 flex flex-col">
+                        <div class="w-16 h-16 mx-auto bg-white border-2 border-brand-700 text-brand-700 rounded-full flex items-center justify-center text-xl font-bold mb-4 shadow-md group-hover:bg-brand-50 transition shrink-0">2</div>
+                        <h3 class="font-bold text-lg mb-2">見学・面談</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">現地の雰囲気をご確認いただき、現在の状況をお伺いします。</p>
+                    </div>
+                </div>
+                <!-- Step 3 -->
+                <div class="relative text-center group flex flex-col">
+                    <div class="step-connector w-full h-full absolute top-0 left-0 hidden md:block"></div>
+                    <div class="relative z-10 bg-white p-6 rounded-3xl shadow-sm border border-gray-100 flex-1 flex flex-col">
+                        <div class="w-16 h-16 mx-auto bg-white border-2 border-brand-700 text-brand-700 rounded-full flex items-center justify-center text-xl font-bold mb-4 shadow-md group-hover:bg-brand-50 transition shrink-0">3</div>
+                        <h3 class="font-bold text-lg mb-2">行政への申請</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">ご入居には「障害者福祉サービス受給者証」が必要です。申請に向けた支援が必要な方はご相談ください。</p>
+                    </div>
+                </div>
+                <!-- Step 4 -->
+                <div class="relative text-center group flex flex-col">
+                    <div class="step-connector w-full h-full absolute top-0 left-0 hidden md:block"></div>
+                    <div class="relative z-10 bg-white p-6 rounded-3xl shadow-sm border border-gray-100 flex-1 flex flex-col">
+                        <div class="w-16 h-16 mx-auto bg-white border-2 border-brand-700 text-brand-700 rounded-full flex items-center justify-center text-xl font-bold mb-4 shadow-md group-hover:bg-brand-50 transition shrink-0">4</div>
+                        <h3 class="font-bold text-lg mb-2">体験入居</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">実際に宿泊し、共同生活が可能かお互いに確認します。</p>
+                    </div>
+                </div>
+                <!-- Step 5 -->
+                <div class="relative text-center group flex flex-col">
+                    <div class="relative z-10 bg-white p-6 rounded-3xl shadow-sm border border-gray-100 flex-1 flex flex-col">
+                        <div class="w-16 h-16 mx-auto bg-orange-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4 shadow-lg group-hover:scale-110 transition shrink-0"><i class="fa-solid fa-flag-checkered"></i></div>
+                        <h3 class="font-bold text-lg mb-2">ご契約・入居</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">受給者証の手続き等を経て、新しい生活がスタートします。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 料金 (Price) -->
+    <section id="price" class="py-24 bg-brand-900 text-white relative overflow-hidden fade-in-section">
+        <!-- 背景装飾 -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-brand-800 rounded-full opacity-50 blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+        
+        <div class="max-w-6xl mx-auto px-4 relative z-10 text-center">
+            <h2 class="text-3xl font-bold mb-6 font-heading">ご利用料金</h2>
+            <p class="mb-12 text-brand-100 text-sm max-w-2xl mx-auto">
+                各種補助金を利用して、できるだけ自己負担を少なくするご相談をしましょう。<br>
+                実費以外の上乗せ請求をすることはありません。
+            </p>
+
+            <div class="bg-white/10 backdrop-blur-md rounded-[2rem] p-8 md:p-12 border border-white/10 shadow-2xl">
+                <div class="grid md:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-brand-700/50">
+                    <div class="px-4 py-2">
+                        <div class="text-brand-300 text-sm font-bold mb-2">家賃 <span class="text-xs font-normal">（※参考値）</span></div>
+                        <div class="text-2xl font-bold mb-2">●万円～</div>
+                        <p class="text-xs text-brand-200">※料金は各ホームによって異なります。詳細は各ホームのページをご参照ください。<br>※上記金額から特別給付金(1万円)、その他補助金等が控除されます。</p>
+                    </div>
+                    <div class="px-4 py-2 pt-6 md:pt-2">
+                        <div class="text-brand-300 text-sm font-bold mb-2">食費</div>
+                        <div class="text-2xl font-bold mb-2">実費精算</div>
+                        <p class="text-xs text-brand-200">朝350円、昼500円、夕650円<br>食べた分だけ徴収し、過不足分は後日清算します。</p>
+                    </div>
+                    <div class="px-4 py-2 pt-6 md:pt-2">
+                        <div class="text-brand-300 text-sm font-bold mb-2">光熱費・通信費</div>
+                        <div class="text-2xl font-bold mb-2">実費精算</div>
+                        <p class="text-xs text-brand-200">電気・水道代 1万円<br>wifi利用料 ●百円<br>過不足分は後日清算いたします。</p>
+                    </div>
+                    <div class="px-4 py-2 pt-6 md:pt-2">
+                        <div class="text-brand-300 text-sm font-bold mb-2">日用品など</div>
+                        <div class="text-2xl font-bold mb-2">実費精算</div>
+                        <p class="text-xs text-brand-200">トイレットペーパー、衛生用品などの消耗品費です。過不足分は後日清算します。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ウェーブ区切り: 料金→FAQ -->
+    <div class="section-wave bg-brand-900" style="margin-bottom:-2px;">
+        <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="60">
+            <path d="M0 20 Q 720 70 1440 20 L1440 60 L0 60 Z" fill="#eef5ff"/>
+        </svg>
+    </div>
+
+    <!-- よくある質問 (FAQ) -->
+    <section id="faq" class="py-24 bg-brand-50 bg-dots-blue fade-in-section relative overflow-hidden">
+        <!-- 雲デコレーション -->
+        <img src="ロゴ/cloud_07.png" alt="" class="absolute pointer-events-none float-anim-slow"
+             style="width:340px; bottom:-20px; right:-10px; opacity:0.27; z-index:0;">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900 font-heading">よくある質問</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Q1 -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="font-bold text-lg text-brand-900 flex gap-3 items-start">
+                        <span class="bg-brand-100 text-brand-700 px-2 py-0.5 rounded text-sm mt-0.5">Q</span>
+                        いせっちハウスはどのような方が利用できますか？
+                    </h3>
+                    <p class="mt-3 text-gray-600 pl-9 text-sm leading-relaxed">
+                        共同生活を送ることができる、知的障がい、精神の障がい、肢体不自由の成人の方が対象です。
+                    </p>
+                </div>
+                <!-- Q2 -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="font-bold text-lg text-brand-900 flex gap-3 items-start">
+                        <span class="bg-brand-100 text-brand-700 px-2 py-0.5 rounded text-sm mt-0.5">Q</span>
+                        夜間のスタッフ体制はどうなっていますか？
+                    </h3>
+                    <p class="mt-3 text-gray-600 pl-9 text-sm leading-relaxed">
+                        当ホームでは夜間支援員を配置しており、巡回や緊急時の対応や見守りを行っています。
+                    </p>
+                </div>
+                <!-- Q3 -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="font-bold text-lg text-brand-900 flex gap-3 items-start">
+                        <span class="bg-brand-100 text-brand-700 px-2 py-0.5 rounded text-sm mt-0.5">Q</span>
+                        お薬の管理に不安があります。
+                    </h3>
+                    <p class="mt-3 text-gray-600 pl-9 text-sm leading-relaxed">
+                        スタッフが服薬確認を行いますのでご安心ください。カレンダーやお薬ボックスを活用し、飲み忘れや重複を防ぎます。
+                    </p>
+                </div>
+                <!-- Q4 -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="font-bold text-lg text-brand-900 flex gap-3 items-start">
+                        <span class="bg-brand-100 text-brand-700 px-2 py-0.5 rounded text-sm mt-0.5">Q</span>
+                        入所をしたあとに、本人がダラダラしないか心配です…。
+                    </h3>
+                    <p class="mt-3 text-gray-600 pl-9 text-sm leading-relaxed">
+                        いせっちハウスでは利用者さんをお客さま扱いいたしません。掃除、皿洗い、洗濯などを通じて、規律ある生活を営んで頂きます。
+                    </p>
+                </div>
+                <!-- Q5 -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="font-bold text-lg text-brand-900 flex gap-3 items-start">
+                        <span class="bg-brand-100 text-brand-700 px-2 py-0.5 rounded text-sm mt-0.5">Q</span>
+                        日中活動先が決まっていないのですが入居できますか？
+                    </h3>
+                    <p class="mt-3 text-gray-600 pl-9 text-sm leading-relaxed">
+                        ご入居頂くには日中活動をしていることが前提になります。現時点で決まっていないようでしたら、スタッフや相談支援専門員と一緒に、ご本人に合った就労先を探すお手伝いをいたします。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- お問い合わせ (Contact) -->
+    <section id="contact" class="py-24 bg-white fade-in-section">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-gray-100">
+                <div class="md:flex">
+                    <div class="md:w-5/12 bg-brand-700 p-10 text-white flex flex-col justify-between relative overflow-hidden">
+                        <div class="relative z-10">
+                            <h2 class="text-3xl font-bold mb-4 font-heading">Contact</h2>
+                            <p class="text-brand-100 text-sm mb-8">
+                                見学・体験入居のご相談など、<br>お気軽にお問い合わせください。
+                            </p>
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-brand-600 rounded-full flex items-center justify-center"><i class="fa-solid fa-phone"></i></div>
+                                    <span class="font-bold text-lg">044-xxx-xxxx</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-brand-600 rounded-full flex items-center justify-center"><i class="fa-solid fa-clock"></i></div>
+                                    <span class="text-sm">平日 9:00 - 18:00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 装飾 -->
+                        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-600 rounded-full opacity-50"></div>
+                    </div>
+                    
+                    <div class="md:w-7/12 p-8 md:p-10 bg-warm-50">
+                        <div class="text-center md:text-left mb-6">
+                            <h3 class="text-2xl font-bold text-gray-800">お問い合わせフォーム</h3>
+                            <p class="text-sm text-gray-500 mt-2">以下のフォームに必要事項をご入力ください。</p>
+                        </div>
+                        
+                        <!-- Formspree フォーム（ID: xpqjzobq） -->
+                        <!-- 注意: 通知先メールアドレスの変更は formspree.io のダッシュボードで行ってください -->
+                        <form id="contactForm" action="https://formspree.io/f/xpqjzobq" method="POST" class="space-y-4">
+                        <!-- スパム対策 honeypot フィールド（ユーザーには見えない） -->
+                        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+                            <div>
+                                <label for="name" class="block text-sm font-bold text-gray-700 mb-1">お名前 <span class="text-orange-500 text-xs">*</span></label>
+                                <input type="text" name="name" id="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" placeholder="山田 太郎">
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-sm font-bold text-gray-700 mb-1">メールアドレス <span class="text-orange-500 text-xs">*</span></label>
+                                <input type="email" name="email" id="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" placeholder="example@email.com">
+                            </div>
+
+                            <div>
+                                <label for="phone" class="block text-sm font-bold text-gray-700 mb-1">電話番号</label>
+                                <input type="tel" name="phone" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" placeholder="090-0000-0000">
+                            </div>
+
+                            <div>
+                                <label for="subject" class="block text-sm font-bold text-gray-700 mb-1">お問い合わせ種別</label>
+                                <select name="subject" id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition bg-white">
+                                    <option value="見学・体験入居について">見学・体験入居について</option>
+                                    <option value="入居に関するご相談">入居に関するご相談</option>
+                                    <option value="採用について">採用について</option>
+                                    <option value="その他">その他</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="message" class="block text-sm font-bold text-gray-700 mb-1">お問い合わせ内容 <span class="text-orange-500 text-xs">*</span></label>
+                                <textarea name="message" id="message" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition" placeholder="ご質問やご希望の日時などをご記入ください。"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-brand-700 text-white font-bold py-3 px-6 rounded-xl shadow-md hover:bg-brand-800 transition transform hover:-translate-y-0.5">
+                                送信する
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ニワトリ ウォーキングキャラクター -->
+    <!-- ニワトリ ウォーキングキャラクター -->
+    <div id="chicken-walker">
+        <div id="chicken-inner">
+            <img id="chicken-img" src="ロゴ/にわとりA_透過.png" alt=""
+                 style="width: 90px; height: 90px; object-fit: contain; display: block;">
+        </div>
+    </div>
+
+    <!-- ひよこ ウォーキングキャラクター -->
+    <div id="hiyoko-walker">
+        <div id="hiyoko-inner">
+            <img id="hiyoko-img" src="ロゴ/ひよこA_透過.png" alt=""
+                 style="width: 60px; height: 60px; object-fit: contain; display: block;">
+        </div>
+    </div>
+
+    <!-- フッター -->
+    <footer class="bg-brand-900 text-white py-12 border-t border-brand-800">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-xs text-gray-400 mb-1">障がい者グループホーム</p>
+            <h4 class="font-bold text-xl mb-4">いせっちハウス</h4>
+            <a href="company.html"
+               class="inline-flex items-center gap-1 text-sm text-brand-200 hover:text-white underline underline-offset-2 decoration-dotted hover:decoration-solid transition mb-3">
+                運営：オウタム合同会社
+                <svg class="w-3 h-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+            </a>
+            <p class="text-xs text-gray-400 mb-6">〒214-0001 神奈川県川崎市多摩区菅仙谷三丁目</p>
+            <p class="text-xs text-gray-500">&copy; 2026 Autumn LLC. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 確認モーダル（初期状態は非表示） -->
+    <div id="confirmationModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50 flex items-center justify-center">
+        <div class="relative p-6 border w-full max-w-lg shadow-2xl rounded-2xl bg-white m-4">
+            <div class="text-center mb-6">
+                <h3 class="text-xl font-bold text-gray-900">送信内容の確認</h3>
+                <p class="text-sm text-gray-500 mt-2">以下の内容で送信してもよろしいですか？</p>
+            </div>
+            
+            <div class="space-y-4 text-sm text-gray-600 bg-gray-50 p-4 rounded-xl mb-6">
+                <div>
+                    <span class="font-bold block text-gray-800 mb-1">お名前:</span>
+                    <span id="confirmName" class="block"></span>
+                </div>
+                <div>
+                    <span class="font-bold block text-gray-800 mb-1">メールアドレス:</span>
+                    <span id="confirmEmail" class="block"></span>
+                </div>
+                <div>
+                    <span class="font-bold block text-gray-800 mb-1">電話番号:</span>
+                    <span id="confirmPhone" class="block"></span>
+                </div>
+                <div>
+                    <span class="font-bold block text-gray-800 mb-1">種別:</span>
+                    <span id="confirmSubject" class="block"></span>
+                </div>
+                <div>
+                    <span class="font-bold block text-gray-800 mb-1">お問い合わせ内容:</span>
+                    <span id="confirmMessage" class="whitespace-pre-wrap block bg-white p-2 rounded border border-gray-200 mt-1"></span>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-3">
+                <button type="button" onclick="closeModal()" class="px-5 py-2.5 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300 transition font-bold">
+                    戻って修正
+                </button>
+                <button type="button" onclick="submitForm()" class="px-5 py-2.5 bg-brand-700 text-white rounded-xl hover:bg-brand-800 transition font-bold shadow-md flex items-center gap-2">
+                    <i class="fa-regular fa-paper-plane"></i> 送信する
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript (機能制御) -->
+    <script>
+        // ハンバーガーメニューの開閉
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                menu.classList.add('hidden');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        // モバイルメニューでリンクをクリックしたらメニューを閉じる
+        function mobileScrollTo(id) {
+            scrollToId(id);
+            toggleMobileMenu();
+        }
+
+        // スムーススクロール関数
+        function scrollToId(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                const headerOffset = 80;
+                const elementPosition = element.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: elementPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // スクロール時のフェードインアニメーション監視
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // 一度表示されたら監視を終了
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-section').forEach((section) => {
+            observer.observe(section);
+        });
+
+        // スライダー制御関数
+        function scrollSlider(direction) {
+            const slider = document.getElementById('locationSlider');
+            const scrollAmount = 420; // カード幅 + gap
+            if (direction === 'left') {
+                slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+
+        // --- お問い合わせフォーム確認モーダル制御 ---
+        const form = document.getElementById('contactForm');
+        const modal = document.getElementById('confirmationModal');
+
+        // フォーム送信ボタンが押された時の処理（確認画面表示）
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // デフォルトの送信をストップ
+            
+            // 入力値を取得してモーダルにセット
+            document.getElementById('confirmName').textContent = form.name.value;
+            document.getElementById('confirmEmail').textContent = form.email.value;
+            document.getElementById('confirmPhone').textContent = form.phone.value || '（未入力）';
+            document.getElementById('confirmSubject').textContent = form.subject.value;
+            document.getElementById('confirmMessage').textContent = form.message.value;
+
+            // モーダルを表示
+            modal.classList.remove('hidden');
+        });
+
+        // 「戻って修正」ボタン
+        function closeModal() {
+            modal.classList.add('hidden');
+        }
+
+        // 「送信する」ボタン（本当の送信）
+        function submitForm() {
+            form.submit();
+        }
+
+        // ===== ニワトリ ウォーキングアニメーション =====
+        (function() {
+            const walker = document.getElementById('chicken-walker');
+            let direction = 'rtl'; // 最初は右から左
+
+            function startChickenWalk() {
+                // クラスをリセット
+                walker.classList.remove('walking-right-to-left', 'walking-left-to-right');
+                // reflow でアニメーションをリスタート
+                void walker.offsetWidth;
+
+                if (direction === 'rtl') {
+                    walker.style.transform = 'translateX(110vw)';
+                    walker.classList.add('walking-right-to-left');
+                } else {
+                    walker.style.transform = 'translateX(-160px)';
+                    walker.classList.add('walking-left-to-right');
+                }
+
+                // アニメーション終了後（11秒）にクラス除去 → 次の登場まで待機
+                const walkDuration = 11000;
+                const waitDuration = 15000 + Math.random() * 20000; // 15〜35秒待機
+
+                setTimeout(function() {
+                    walker.classList.remove('walking-right-to-left', 'walking-left-to-right');
+                    direction = direction === 'rtl' ? 'ltr' : 'rtl';
+                    // 次の登場をスケジュール
+                    setTimeout(startChickenWalk, waitDuration);
+                }, walkDuration);
+            }
+
+            // ページ読み込みから8秒後に最初の登場
+            setTimeout(startChickenWalk, 8000);
+        })();
+
+        // ===== ひよこ ウォーキングアニメーション（速め・頻度低め） =====
+        (function() {
+            const walker = document.getElementById('hiyoko-walker');
+            let direction = 'ltr'; // 最初は左から右
+
+            function startHiyokoWalk() {
+                walker.classList.remove('hiyoko-rtl', 'hiyoko-ltr');
+                void walker.offsetWidth;
+
+                if (direction === 'rtl') {
+                    walker.style.transform = 'translateX(110vw)';
+                    walker.classList.add('hiyoko-rtl');
+                } else {
+                    walker.style.transform = 'translateX(-100px)';
+                    walker.classList.add('hiyoko-ltr');
+                }
+
+                const walkDuration = 5000; // 速め（5秒で横断）
+                const waitDuration = 25000 + Math.random() * 25000; // 25〜50秒待機
+
+                setTimeout(function() {
+                    walker.classList.remove('hiyoko-rtl', 'hiyoko-ltr');
+                    direction = direction === 'rtl' ? 'ltr' : 'rtl';
+                    setTimeout(startHiyokoWalk, waitDuration);
+                }, walkDuration);
+            }
+
+            // ページ読み込みから25秒後に最初の登場
+            setTimeout(startHiyokoWalk, 25000);
+        })();
+    </script>
+</body>
+</html>

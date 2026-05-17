@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background-color: #043882;
+    font-family: 'Zen Maru Gothic', 'Noto Sans JP', sans-serif;
+    position: relative;
+  }
+
+  /* ドットパターン背景 */
+  .bg-dots {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+  }
+
+  /* 背景グラデーション */
+  .bg-grad {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, #0854AA 0%, #043882 55%, #032d6b 100%);
+  }
+
+  /* 雲 */
+  .cloud { position: absolute; opacity: 0.3; }
+  .cloud-tl { top: -30px; left: -40px; width: 280px; }
+  .cloud-tr { top: -20px; right: 40px; width: 220px; opacity: 0.2; }
+  .cloud-bl { bottom: -20px; left: 80px; width: 200px; opacity: 0.2; }
+  .cloud-br { bottom: 10px; right: 200px; width: 260px; opacity: 0.18; }
+
+  /* メインコンテンツ */
+  .content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    padding: 0 80px;
+  }
+
+  /* 左：テキストエリア */
+  .text-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .subtitle {
+    font-size: 22px;
+    color: rgba(255,255,255,0.85);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    background: rgba(255,255,255,0.12);
+    padding: 6px 18px;
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .logo-img {
+    width: 420px;
+    filter: drop-shadow(0 4px 16px rgba(0,0,0,0.4));
+  }
+
+  .tagline {
+    font-size: 17px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+    margin-top: 4px;
+  }
+
+  .url-badge {
+    margin-top: 8px;
+    font-size: 15px;
+    color: #F5C108;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* 右：ひよこ＋装飾 */
+  .chara-area {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .chara-img {
+    width: 260px;
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.35));
+    animation: none;
+  }
+
+  /* 黄色い丸装飾 */
+  .deco-circle {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,193,8,0.15), transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* 下部バー */
+  .bottom-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #F5C108, #E8A800, #F5C108);
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Zen+Maru+Gothic:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="bg-grad"></div>
+  <div class="bg-dots"></div>
+
+  <!-- 雲 -->
+  <img class="cloud cloud-tl" src="画像素材/雲/cloud_04.png" alt="">
+  <img class="cloud cloud-tr" src="画像素材/雲/cloud_08.png" alt="">
+  <img class="cloud cloud-bl" src="画像素材/雲/cloud_06.png" alt="">
+  <img class="cloud cloud-br" src="画像素材/雲/cloud_03.png" alt="">
+
+  <div class="content">
+    <div class="text-area">
+      <div class="subtitle">障がい者グループホーム</div>
+      <img class="logo-img" src="画像素材/ロゴ_キャラクター/いせっちハウス_グループホーム_改行_透過.png" alt="いせっちハウス">
+      <div class="tagline">
+        西東京市を拠点に、<br>あたたかい暮らしをお届けします。
+      </div>
+      <div class="url-badge">🌐 isecchi.com</div>
+    </div>
+    <div class="chara-area">
+      <div class="deco-circle"></div>
+      <img class="chara-img" src="画像素材/ロゴ_キャラクター/にわとりA_透過.png" alt="にわとりキャラクター">
+    </div>
+  </div>
+
+  <div class="bottom-bar"></div>
+</body>
+</html>

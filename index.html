@@ -28,7 +28,7 @@
     <!-- FontAwesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&family=M+PLUS+Rounded+1c:wght@700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -416,10 +416,15 @@
 
                 <!-- ロゴ画像（2行・クロップ版） -->
                 <div class="mb-10 w-full">
-                    <img src="画像素材/ロゴ_キャラクター/いせっちハウス_グループホーム_改行_透過_crop.png"
-                         alt="障がい者グループホーム いせっちハウス"
-                         class="h-auto object-contain mx-auto"
-                         style="width: 100%; max-width: 688px;">
+                    <div class="relative mx-auto" style="max-width: 688px;">
+                        <img src="画像素材/ロゴ_キャラクター/いせっちハウス_グループホーム_改行_透過_crop.png"
+                             alt="障がい者グループホーム いせっちハウス"
+                             class="h-auto object-contain w-full">
+                        <!-- ハンコ：開業予定 -->
+                        <div style="position: absolute; top: 42%; left: 9%; width: 112px; height: 112px; border-radius: 50%; background: rgba(255,255,255,0.88); border: 4px solid #b22222; color: #b22222; font-weight: bold; font-size: 1rem; font-family: 'M PLUS Rounded 1c', sans-serif; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.55; transform: rotate(-15deg); box-shadow: inset 0 0 0 3px rgba(178,34,34,0.25), 2px 3px 10px rgba(0,0,0,0.2);">
+                            2026年9月<br>オープン！
+                        </div>
+                    </div>
                 </div>
                 <p class="text-lg md:text-xl text-blue-100 mb-12 leading-relaxed font-medium">
                     <span class="block">いせっちハウスは、西東京市を拠点とした<br class="sm:hidden">障がい者グループホームです。</span>

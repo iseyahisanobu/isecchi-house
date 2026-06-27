@@ -346,14 +346,14 @@
 
                 <!-- デスクトップメニュー -->
                 <nav class="hidden md:flex items-center space-x-1">
-                    <button onclick="scrollToId('concept')" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">いせっちハウス</button>
-                    <button onclick="scrollToId('locations')" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">事業所</button>
+                    <button onclick="scrollToId('locations')" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">運営ホーム</button>
                     <button onclick="scrollToId('service')" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">いせっちハウスの暮らし</button>
                     <button onclick="scrollToId('flow')" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">入居の流れ</button>
                     <button onclick="scrollToId('price')" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">料金</button>
                     <button onclick="scrollToId('faq')" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">よくある質問</button>
                     <!-- 追加: 採用情報リンク -->
                     <a href="recruit.html" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">採用情報</a>
+                    <a href="company.html" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">私たちについて</a>
 
                     <button onclick="scrollToId('contact')" class="ml-4 px-5 py-2.5 rounded-full text-sm font-bold shadow-md hover:opacity-90 hover:shadow-lg transition transform hover:-translate-y-0.5 flex items-center gap-2" style="background-color:#F5C108; color:#043882;">
                         <i class="fa-regular fa-envelope"></i> お問い合わせ
@@ -372,14 +372,14 @@
         <!-- モバイルメニュードロップダウン -->
         <div id="mobileMenu" class="hidden md:hidden bg-brand-800 border-t border-brand-700 absolute w-full shadow-lg">
             <div class="px-4 pt-2 pb-6 space-y-2">
-                <button onclick="mobileScrollTo('concept')" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">いせっちハウス</button>
-                <button onclick="mobileScrollTo('locations')" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">事業所</button>
+                <button onclick="mobileScrollTo('locations')" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">運営ホーム</button>
                 <button onclick="mobileScrollTo('service')" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">いせっちハウスの暮らし</button>
                 <button onclick="mobileScrollTo('flow')" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">入居までの流れ</button>
                 <button onclick="mobileScrollTo('price')" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">ご利用料金</button>
                 <button onclick="mobileScrollTo('faq')" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">よくある質問</button>
                 <!-- 追加: モバイル用採用情報リンク -->
                 <a href="recruit.html" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">採用情報</a>
+                <a href="company.html" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">私たちについて</a>
 
                 <button onclick="mobileScrollTo('contact')" class="block w-full text-center mt-4 px-3 py-4 text-base font-bold rounded-xl shadow-md" style="background-color:#F5C108; color:#043882;">
                     お問い合わせ・見学予約
@@ -493,15 +493,17 @@
                         <div class="h-80 overflow-hidden relative">
                             <img src="画像素材/中町5丁目/S__43835405.jpg" alt="いせっちハウス中町5丁目外観"
                                  class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110">
-                            <div class="absolute bottom-0 left-0 bg-brand-700 text-white text-xs px-3 py-1 rounded-tr-lg">男性棟</div>
+                            <div class="absolute bottom-4 left-4 text-2xl font-bold px-5 py-2 rounded-xl font-heading" style="background-color:#ffffff; color:#043882; border: 3px solid #043882;">男性棟</div>
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold text-gray-900 mb-2">いせっちハウス中町5丁目</h3>
                             <p class="text-sm text-gray-500 mb-4"><i class="fa-solid fa-location-dot mr-1"></i> 東京都西東京市中町5丁目</p>
                             <div class="flex flex-wrap gap-2 mb-6">
-                                <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">戸建て</span>
-                                <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">定員4名</span>
-                                <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">東伏見駅 徒歩17分</span>
+                                <span class="text-sm font-bold px-2 py-1 rounded" style="background-color:#F5C108; color:#043882;">戸建て</span>
+                                <span class="text-sm font-bold px-2 py-1 rounded" style="background-color:#F5C108; color:#043882;">定員4名</span>
+                                <span class="text-sm font-bold px-2 py-1 rounded" style="background-color:#F5C108; color:#043882;">4駅利用可</span>
+                                <span class="text-sm font-bold px-2 py-1 rounded" style="background-color:#F5C108; color:#043882;">最寄りバス停～徒歩8分</span>
+                                <span class="text-sm font-bold px-2 py-1 rounded" style="background-color:#F5C108; color:#043882;">駐輪スペースあり</span>
                             </div>
                             <div class="block w-full text-center bg-brand-50 text-brand-700 border border-brand-200 py-3 rounded-xl font-bold group-hover:bg-brand-700 group-hover:text-white transition">
                                 詳細を見る
@@ -696,7 +698,7 @@
                     <div class="px-4 py-2 pt-6 md:pt-2">
                         <div class="text-brand-300 text-sm font-bold mb-2">食費</div>
                         <div class="text-2xl font-bold mb-2">実費精算</div>
-                        <p class="text-xs text-brand-200">朝350円、昼500円、夕650円<br>食べた分だけ徴収し、過不足分は後日清算します。</p>
+                        <p class="text-xs text-brand-200">朝350円、昼400円、夕650円<br>食べた分だけ徴収し、過不足分は後日清算します。</p>
                     </div>
                     <div class="px-4 py-2 pt-6 md:pt-2">
                         <div class="text-brand-300 text-sm font-bold mb-2">光熱費・通信費</div>
@@ -738,7 +740,7 @@
                         いせっちハウスはどのような方が利用できますか？
                     </h3>
                     <p class="mt-3 text-gray-600 pl-9 text-sm leading-relaxed">
-                        共同生活を送ることができる、精神障がい、知的障がい、身体障がいの成人の方が対象です。
+                        共同生活を送ることができる精神障がい、知的障がいの成人の方が対象です。
                     </p>
                 </div>
                 <!-- Q2 -->

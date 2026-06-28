@@ -50,14 +50,48 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- ナビゲーション（簡易） -->
-    <header class="fixed w-full top-0 z-50 bg-brand-800 border-b border-brand-900 shadow-md h-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-2 text-white hover:text-yellow-200 transition">
-                <i class="fa-solid fa-arrow-left text-sm"></i>
-                <img src="画像素材/ロゴ_キャラクター/いせっちハウス_グループホーム_一行_透過.png"
-                     alt="いせっちハウス" class="h-14 w-auto object-contain">
-            </a>
+    <!-- ナビゲーションバー -->
+    <header class="fixed w-full top-0 z-50 bg-brand-800 border-b border-brand-900 shadow-md h-20" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+            <div class="flex justify-between items-center h-full">
+                <a href="index.html" class="flex items-center group">
+                    <img src="画像素材/ロゴ_キャラクター/いせっちハウス_グループホーム_一行_透過.png"
+                         alt="いせっちハウス"
+                         class="h-14 w-auto object-contain group-hover:opacity-90 transition"
+                         style="max-width: 280px;">
+                </a>
+                <nav class="hidden md:flex items-center space-x-1">
+                    <a href="index.html#locations" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">運営ホーム</a>
+                    <a href="index.html#service" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">いせっちハウスの暮らし</a>
+                    <a href="index.html#flow" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">入居の流れ</a>
+                    <a href="index.html#price" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">料金</a>
+                    <a href="index.html#faq" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">よくある質問</a>
+                    <a href="recruit.html" class="px-3 py-2 text-sm font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">採用情報</a>
+                    <a href="company.html" class="px-3 py-2 text-sm font-medium text-yellow-300 hover:text-yellow-200 hover:bg-brand-700 rounded-lg transition">私たちについて</a>
+                    <a href="index.html#contact" class="ml-4 px-5 py-2.5 rounded-full text-sm font-bold shadow-md hover:opacity-90 transition flex items-center gap-2" style="background-color:#F5C108; color:#043882;">
+                        <i class="fa-regular fa-envelope"></i> お問い合わせ
+                    </a>
+                </nav>
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-white hover:text-yellow-200 p-2 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl" id="menuIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden bg-brand-800 border-t border-brand-700 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="index.html#locations" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">運営ホーム</a>
+                <a href="index.html#service" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">いせっちハウスの暮らし</a>
+                <a href="index.html#flow" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">入居までの流れ</a>
+                <a href="index.html#price" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">ご利用料金</a>
+                <a href="index.html#faq" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">よくある質問</a>
+                <a href="recruit.html" class="block w-full text-left px-3 py-3 text-base font-medium text-white hover:text-yellow-200 hover:bg-brand-700 rounded-md">採用情報</a>
+                <a href="company.html" class="block w-full text-left px-3 py-3 text-base font-medium text-yellow-300 hover:text-yellow-200 hover:bg-brand-700 rounded-md">私たちについて</a>
+                <a href="index.html#contact" class="block w-full text-center mt-4 px-3 py-4 text-base font-bold rounded-xl shadow-md" style="background-color:#F5C108; color:#043882;">
+                    お問い合わせ・見学予約
+                </a>
+            </div>
         </div>
     </header>
 
@@ -73,10 +107,10 @@
         </div>
     </section>
 
-    <!-- 代表者ご挨拶セクション -->
+    <!-- 代表者ごあいさつセクション -->
     <section class="py-16 bg-white">
         <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-2xl font-bold text-brand-900 mb-8 font-heading">代表者ご挨拶</h2>
+            <h2 class="text-2xl font-bold text-brand-900 mb-8 font-heading">代表者ごあいさつ</h2>
 
             <div class="flex flex-col md:flex-row gap-8 items-start">
 
@@ -86,8 +120,8 @@
                     <img src="画像素材/ロゴ_キャラクター/伊勢谷_サイン.jpg"
                          alt="代表者署名" class="h-12 w-auto mb-3"
                          style="mix-blend-mode: multiply;">
-                    <div class="w-52 h-52 rounded-2xl overflow-hidden">
-                        <img src="画像素材/その他/プロフ写真.JPG" alt="代表者" class="w-full h-full object-cover object-center">
+                    <div class="w-80 h-80 rounded-2xl overflow-hidden">
+                        <img src="画像素材/その他/プロフ写真2.jpg" alt="代表者" class="w-full h-full object-cover object-center">
                     </div>
                 </div>
 
@@ -211,10 +245,27 @@
             <p class="text-xs text-gray-400 mb-1">障がい者グループホーム</p>
             <h4 class="font-bold text-lg mb-3">いせっちハウス</h4>
             <p class="text-xs text-gray-400 mb-1">運営：オウタム合同会社</p>
-            <p class="text-xs text-gray-400 mb-5">〒214-0006 神奈川県川崎市多摩区菅仙谷三丁目</p>
+            <p class="text-xs text-gray-400 mb-4">〒214-0006 神奈川県川崎市多摩区菅仙谷三丁目</p>
+            <div class="mb-5">
+                <a href="https://www.instagram.com/isecchi_house/" target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-bold transition hover:opacity-80"
+                   style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color:#fff;">
+                    <i class="fa-brands fa-instagram text-lg"></i> Instagram
+                </a>
+            </div>
             <p class="text-xs text-gray-500">&copy; 2026 Autumn LLC. All rights reserved.</p>
         </div>
     </footer>
 
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        }
+    </script>
 </body>
 </html>

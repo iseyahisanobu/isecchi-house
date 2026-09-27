@@ -1,2 +1,7 @@
 .claude/
 HP作成準備_2026-03-21/
+
+# 個人情報・パスワードを含むため、Publicリポジトリには含めない
+# （内容はCloudflare KVに直接保存し、Workerから配信する）
+portal/riyousha-joho.html
+portal/security.html

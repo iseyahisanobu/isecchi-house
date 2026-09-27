@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>調理と食事提供｜スタッフ専用</title>
+    <!-- 検索エンジンには表示させない（社外非公開ページ） -->
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" href="../画像素材/ロゴ_キャラクター/にわとりA_透過.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#F0FAE0', 100: '#DBF2B8', 700: '#6DBE45', 800: '#529433', 900: '#3E7226' },
+                        warm: { 50: '#FAFDF3', 800: '#2E3B22' }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        heading: ['"Zen Maru Gothic"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Noto Sans JP', sans-serif; }
+        h1, h2, h3 { font-family: 'Zen Maru Gothic', sans-serif; }
+    </style>
+</head>
+<body class="bg-warm-50 text-warm-800 min-h-screen md:flex">
+
+    <!-- サイドバー（PC） -->
+    <aside class="hidden md:flex md:flex-col md:w-60 md:shrink-0 bg-brand-700 text-white md:h-screen md:sticky md:top-0 md:overflow-y-auto">
+        <a href="index.html" class="block px-6 py-6 border-b border-brand-800">
+            <span class="block font-bold text-lg leading-snug">いせっちハウス</span>
+            <span class="block text-sm text-brand-50/80">スタッフ専用ポータル</span>
+        </a>
+        <nav class="flex-1 py-3">
+            <a href="rinen.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">「いせっち」の理念</a>
+            <a href="shift.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">シフト</a>
+            <a href="sesshikata.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">利用者との接し方</a>
+            <a href="chouri-shokuji.html" class="block px-6 py-3 text-sm font-medium bg-brand-800 transition">調理と食事提供</a>
+            <a href="gyomu-nagare.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">1日の業務の流れ</a>
+            <a href="care-all.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">ケアオールについて</a>
+            <a href="security.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">セキュリティ関連</a>
+            <a href="gomi-shori.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">ゴミ処理</a>
+            <div class="border-t border-brand-800 mx-6 my-3"></div>
+            <a href="riyousha-joho.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">
+                利用者情報
+                <span class="block text-[11px] font-normal text-amber-200 mt-0.5"><i class="fa-solid fa-triangle-exclamation"></i> 取り扱い要注意</span>
+            </a>
+        </nav>
+    </aside>
+
+    <div class="md:flex-1 md:min-w-0">
+
+        <!-- モバイル上部バー -->
+        <header class="md:hidden sticky top-0 z-40 bg-brand-700 text-white shadow-md">
+            <div class="flex items-center justify-between h-16 px-4">
+                <a href="index.html" class="font-bold leading-tight">
+                    いせっちハウス
+                    <span class="block text-[11px] font-normal text-brand-50/80">スタッフ専用ポータル</span>
+                </a>
+                <button onclick="toggleMobileMenu()" class="p-2" aria-label="メニュー">
+                    <i class="fa-solid fa-bars text-2xl" id="menuIcon"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- モバイルドロワー -->
+        <div id="mobileMenu" class="hidden md:hidden fixed inset-0 z-50">
+            <div class="absolute inset-0 bg-black/40" onclick="toggleMobileMenu()"></div>
+            <div class="absolute top-0 left-0 h-full w-72 max-w-[80%] bg-brand-700 text-white overflow-y-auto shadow-xl">
+                <div class="flex items-start justify-between px-6 py-6 border-b border-brand-800">
+                    <a href="index.html">
+                        <span class="block font-bold text-lg leading-snug">いせっちハウス</span>
+                        <span class="block text-sm text-brand-50/80">スタッフ専用ポータル</span>
+                    </a>
+                    <button onclick="toggleMobileMenu()" class="text-2xl leading-none" aria-label="閉じる">&times;</button>
+                </div>
+                <nav class="py-3">
+                    <a href="rinen.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">「いせっち」の理念</a>
+                    <a href="shift.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">シフト</a>
+                    <a href="sesshikata.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">利用者との接し方</a>
+                    <a href="chouri-shokuji.html" class="block px-6 py-3 text-base font-medium bg-brand-800">調理と食事提供</a>
+                    <a href="gyomu-nagare.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">1日の業務の流れ</a>
+                    <a href="care-all.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">ケアオールについて</a>
+                    <a href="security.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">セキュリティ関連</a>
+                    <a href="gomi-shori.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">ゴミ処理</a>
+                    <div class="border-t border-brand-800 mx-6 my-3"></div>
+                    <a href="riyousha-joho.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">
+                        利用者情報
+                        <span class="block text-xs font-normal text-amber-200 mt-0.5"><i class="fa-solid fa-triangle-exclamation"></i> 取り扱い要注意</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <main class="max-w-2xl mx-auto px-4 py-8">
+            <h1 class="text-xl font-bold text-brand-900 mb-1">調理と食事提供</h1>
+            <p class="text-xs text-warm-800/40 mb-4">※写真資料は追って追加予定です。</p>
+
+            <!-- ① はじめに -->
+            <section class="mb-4">
+                <button onclick="toggleAccordion('acc-hajimete')"
+                        class="w-full bg-white rounded-2xl shadow-md p-5 flex items-center justify-between text-left">
+                    <span class="font-bold text-brand-900">① はじめに</span>
+                    <i class="fa-solid fa-chevron-down text-brand-700 transition-transform" id="icon-acc-hajimete"></i>
+                </button>
+                <div id="acc-hajimete" class="hidden bg-white rounded-2xl shadow-md p-6 mt-2">
+                    <p class="text-warm-800/90 leading-relaxed mb-2">いせっちでは、食事は一日の最大のご褒美だと考えています。無理にこだわった料理を作る必要はありませんし、スーパーの総菜や冷凍食品を使うこともOKなので、利用者さんがほっとする料理の提供をお願いいたします。</p>
+                    <p class="text-warm-800/90 leading-relaxed mb-4">LINEワークスの前後のやりとりを鑑みながら、得意料理や利用者さんに食べてもらいたいもの、自分が食べたいものを作ってください。</p>
+
+                    <p class="font-bold text-warm-800 mb-2">以下、主な注意点です。</p>
+                    <ul class="space-y-2 text-warm-800/90 leading-relaxed list-disc list-inside">
+                        <li>私たちはチームで料理提供をしており、各スタッフの調理技術にも差もあります。利用者さんがスタッフの選り好みをしないよう、可能な限りでバランスを取るよう心掛けてください。</li>
+                        <li>利用者さんのアレルギーや好き嫌いの確認をお願いします。※<a href="riyousha-joho.html" class="text-brand-700 underline">利用者情報ページ</a>をご参照ください。</li>
+                        <li>利用者が「味が薄い」と訴える場合は、提供したスタッフの判断で調味料を追加することはOKです。追加の加減が難しい利用者さんもいるので、追加対応は必ずスタッフが行ってください。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ② 感染症対策 -->
+            <section class="mb-4">
+                <button onclick="toggleAccordion('acc-kansen')"
+                        class="w-full bg-white rounded-2xl shadow-md p-5 flex items-center justify-between text-left">
+                    <span class="font-bold text-brand-900">② 感染症対策</span>
+                    <i class="fa-solid fa-chevron-down text-brand-700 transition-transform" id="icon-acc-kansen"></i>
+                </button>
+                <div id="acc-kansen" class="hidden bg-white rounded-2xl shadow-md p-6 mt-2">
+                    <p class="text-warm-800/90 mb-3">以下ルールの徹底をお願いします。</p>
+                    <ul class="space-y-2 text-warm-800/90 leading-relaxed list-disc list-inside">
+                        <li>ナマ肉や魚を調理したまな板や包丁は利用の都度、必ず洗剤で洗ってください。また調理をした手も都度洗いましょう。生食する野菜やお皿などの備品に触れないようにしてください。</li>
+                        <li>大皿料理、鍋料理そのまま等の提供はしません。手間ですが個別取り分けをお願いします。</li>
+                        <li>自宅、ホーム外での事前調理はNGとします。レパートリーの幅は狭まりますが、ホームについてから、ホームの道具のみで調理をしてください。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ③ 食事提供ルール（a〜fを内包） -->
+            <section class="mb-4">
+                <button onclick="toggleAccordion('acc-shokuji-rule')"
+                        class="w-full bg-white rounded-2xl shadow-md p-5 flex items-center justify-between text-left">
+                    <span class="font-bold text-brand-900">③ 食事提供ルール</span>
+                    <i class="fa-solid fa-chevron-down text-brand-700 transition-transform" id="icon-acc-shokuji-rule"></i>
+                </button>
+                <div id="acc-shokuji-rule" class="hidden bg-white rounded-2xl shadow-md p-6 mt-2">
+                    <p class="text-warm-800/90 leading-relaxed mb-4">夕飯、朝食はみなさん食べて頂く、というのが基本です。料金設定は下記のとおりです。</p>
+
+                    <div class="space-y-5">
+                        <div class="border-l-4 border-brand-200 pl-4">
+                            <p class="font-bold text-brand-900 mb-2">a. 利用者が払う料金</p>
+                            <p class="text-warm-800/90 leading-relaxed mb-2">朝・夕食はみなさん召し上がって頂くというのが基本です。</p>
+                            <ul class="space-y-1 text-warm-800/90 leading-relaxed list-disc list-inside mb-2">
+                                <li>朝食350円、夕食650円</li>
+                                <li>昼食400円、自炊おにぎり100円</li>
+                            </ul>
+                            <p class="text-warm-800/90 leading-relaxed">※実食分に応じて、翌月に利用者に請求します。</p>
+                        </div>
+
+                        <div class="border-l-4 border-brand-200 pl-4">
+                            <p class="font-bold text-brand-900 mb-2">b. 提供の記録</p>
+                            <p class="text-warm-800/90 leading-relaxed mb-1">ケア・オールでの入力とともに、「食事提供チェックシート」にも記入をお願いします。</p>
+                            <p class="text-warm-800/90 leading-relaxed">※スタッフが食べる分は会社負担となります。チェックを忘れないようお願いします。</p>
+                        </div>
+
+                        <div class="border-l-4 border-brand-200 pl-4">
+                            <p class="font-bold text-brand-900 mb-2">c. 片付け</p>
+                            <p class="text-warm-800/90 leading-relaxed mb-1">食べ終わった順で、利用者さんに自分のお皿等を洗って頂きます。</p>
+                            <p class="text-warm-800/90 leading-relaxed">全員の食事が終わったら、スタッフは洗い物のダブルチェックをお願いします。</p>
+                        </div>
+
+                        <div class="border-l-4 border-brand-200 pl-4">
+                            <p class="font-bold text-brand-900 mb-2">d. 食事提供が不要な場合</p>
+                            <p class="text-warm-800/90 leading-relaxed mb-1">前々日の20時までに「食事不要届」を提出してもらいます。</p>
+                            <p class="text-warm-800/90 leading-relaxed">受領したスタッフはサインのうえ、LINEワークスにて共有をお願いします。</p>
+                        </div>
+
+                        <div class="border-l-4 border-brand-200 pl-4">
+                            <p class="font-bold text-brand-900 mb-2">e. 昼食提供に関して</p>
+                            <div class="mb-2">
+                                <p class="font-bold text-warm-800 mb-1">平日</p>
+                                <ul class="space-y-1 text-warm-800/90 leading-relaxed list-disc list-inside">
+                                    <li>体調不良等で通所できなかった場合のみ、本人の希望に応じて提供します。</li>
+                                    <li>1時間程度の残業が可能であれば、昼食を用意のうえ退勤としてください。</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <p class="font-bold text-warm-800 mb-1">土日祝</p>
+                                <p class="text-warm-800/90 leading-relaxed">運用調整中です。</p>
+                            </div>
+                        </div>
+
+                        <div class="border-l-4 border-brand-200 pl-4">
+                            <p class="font-bold text-brand-900 mb-2">f. 自炊おにぎり とは？</p>
+                            <p class="text-warm-800/90 leading-relaxed mb-2">就労先に持っていくためのご飯を提供するサービスです。炊飯までスタッフが対応し、おにぎりetc.の準備は自立支援の一環として利用者自身が行います。準備時の見守りをお願いします！</p>
+                            <ul class="space-y-1 text-warm-800/90 leading-relaxed list-disc list-inside">
+                                <li>希望する利用者は、前日20時までにスタッフに申告して頂きます。申し出に従い、多めにご飯を炊いたり冷凍ご飯の活用してください。</li>
+                                <li>分量はひとり1合分まで。</li>
+                                <li>しゃけ、梅干し、ふりかけetc.、夕飯の残り（もしあれば）を利用してもOKです。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ④ 立替金の清算 -->
+            <section class="mb-4">
+                <button onclick="toggleAccordion('acc-tatekaekin')"
+                        class="w-full bg-white rounded-2xl shadow-md p-5 flex items-center justify-between text-left">
+                    <span class="font-bold text-brand-900">④ 立替金の清算</span>
+                    <i class="fa-solid fa-chevron-down text-brand-700 transition-transform" id="icon-acc-tatekaekin"></i>
+                </button>
+                <div id="acc-tatekaekin" class="hidden bg-white rounded-2xl shadow-md p-6 mt-2">
+                    <p class="text-warm-800/90 leading-relaxed mb-3">食材調達にあたり立替をして頂きありがとうございます。スーパー等で購入時は、「領収書」ではなく通常のレシート（明細）としてください。</p>
+                    <ul class="space-y-2 text-warm-800/90 leading-relaxed list-disc list-inside">
+                        <li>購入額の目安は利用者人数やタイミングによって異なります。管理者より指示をいたします。</li>
+                        <li>レシートは、管理者までLINEワークスで写メを送ってください。</li>
+                        <li>レシート原本は裏面に記名のうえ、書庫内のレシートBOXに入れてください。</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center text-xs text-warm-800/50 py-8">
+            &copy; いせっちハウス（スタッフ専用）
+        </footer>
+    </div>
+
+<script>
+    function toggleAccordion(id) {
+        const panel = document.getElementById(id);
+        const icon = document.getElementById('icon-' + id);
+        panel.classList.toggle('hidden');
+        if (icon) icon.classList.toggle('rotate-180');
+    }
+
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        const icon = document.getElementById('menuIcon');
+        if (menu.classList.contains('hidden')) {
+            menu.classList.remove('hidden');
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-xmark');
+        } else {
+            menu.classList.add('hidden');
+            icon.classList.remove('fa-xmark');
+            icon.classList.add('fa-bars');
+        }
+    }
+</script>
+
+</body>
+</html>

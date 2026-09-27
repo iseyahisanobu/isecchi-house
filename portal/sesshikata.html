@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>利用者との接し方｜スタッフ専用</title>
+    <!-- 検索エンジンには表示させない（社外非公開ページ） -->
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" href="../画像素材/ロゴ_キャラクター/にわとりA_透過.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#F0FAE0', 100: '#DBF2B8', 700: '#6DBE45', 800: '#529433', 900: '#3E7226' },
+                        warm: { 50: '#FAFDF3', 800: '#2E3B22' }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        heading: ['"Zen Maru Gothic"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Noto Sans JP', sans-serif; }
+        h1, h2, h3 { font-family: 'Zen Maru Gothic', sans-serif; }
+    </style>
+</head>
+<body class="bg-warm-50 text-warm-800 min-h-screen md:flex">
+
+    <!-- サイドバー（PC） -->
+    <aside class="hidden md:flex md:flex-col md:w-60 md:shrink-0 bg-brand-700 text-white md:h-screen md:sticky md:top-0 md:overflow-y-auto">
+        <a href="index.html" class="block px-6 py-6 border-b border-brand-800">
+            <span class="block font-bold text-lg leading-snug">いせっちハウス</span>
+            <span class="block text-sm text-brand-50/80">スタッフ専用ポータル</span>
+        </a>
+        <nav class="flex-1 py-3">
+            <a href="rinen.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">「いせっち」の理念</a>
+            <a href="shift.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">シフト</a>
+            <a href="sesshikata.html" class="block px-6 py-3 text-sm font-medium bg-brand-800 transition">利用者との接し方</a>
+            <a href="chouri-shokuji.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">調理と食事提供</a>
+            <a href="gyomu-nagare.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">1日の業務の流れ</a>
+            <a href="care-all.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">ケアオールについて</a>
+            <a href="security.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">セキュリティ関連</a>
+            <a href="gomi-shori.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">ゴミ処理</a>
+            <div class="border-t border-brand-800 mx-6 my-3"></div>
+            <a href="riyousha-joho.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">
+                利用者情報
+                <span class="block text-[11px] font-normal text-amber-200 mt-0.5"><i class="fa-solid fa-triangle-exclamation"></i> 取り扱い要注意</span>
+            </a>
+        </nav>
+    </aside>
+
+    <div class="md:flex-1 md:min-w-0">
+
+        <!-- モバイル上部バー -->
+        <header class="md:hidden sticky top-0 z-40 bg-brand-700 text-white shadow-md">
+            <div class="flex items-center justify-between h-16 px-4">
+                <a href="index.html" class="font-bold leading-tight">
+                    いせっちハウス
+                    <span class="block text-[11px] font-normal text-brand-50/80">スタッフ専用ポータル</span>
+                </a>
+                <button onclick="toggleMobileMenu()" class="p-2" aria-label="メニュー">
+                    <i class="fa-solid fa-bars text-2xl" id="menuIcon"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- モバイルドロワー -->
+        <div id="mobileMenu" class="hidden md:hidden fixed inset-0 z-50">
+            <div class="absolute inset-0 bg-black/40" onclick="toggleMobileMenu()"></div>
+            <div class="absolute top-0 left-0 h-full w-72 max-w-[80%] bg-brand-700 text-white overflow-y-auto shadow-xl">
+                <div class="flex items-start justify-between px-6 py-6 border-b border-brand-800">
+                    <a href="index.html">
+                        <span class="block font-bold text-lg leading-snug">いせっちハウス</span>
+                        <span class="block text-sm text-brand-50/80">スタッフ専用ポータル</span>
+                    </a>
+                    <button onclick="toggleMobileMenu()" class="text-2xl leading-none" aria-label="閉じる">&times;</button>
+                </div>
+                <nav class="py-3">
+                    <a href="rinen.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">「いせっち」の理念</a>
+                    <a href="shift.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">シフト</a>
+                    <a href="sesshikata.html" class="block px-6 py-3 text-base font-medium bg-brand-800">利用者との接し方</a>
+                    <a href="chouri-shokuji.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">調理と食事提供</a>
+                    <a href="gyomu-nagare.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">1日の業務の流れ</a>
+                    <a href="care-all.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">ケアオールについて</a>
+                    <a href="security.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">セキュリティ関連</a>
+                    <a href="gomi-shori.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">ゴミ処理</a>
+                    <div class="border-t border-brand-800 mx-6 my-3"></div>
+                    <a href="riyousha-joho.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">
+                        利用者情報
+                        <span class="block text-xs font-normal text-amber-200 mt-0.5"><i class="fa-solid fa-triangle-exclamation"></i> 取り扱い要注意</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <main class="max-w-2xl mx-auto px-4 py-8">
+            <h1 class="text-xl font-bold text-brand-900 mb-4">利用者との接し方</h1>
+
+            <div class="bg-white rounded-2xl shadow-md p-6">
+                <p class="text-warm-800/70">
+                    このページは準備中です。内容は追ってこちらに追加されます。
+                </p>
+            </div>
+        </main>
+
+        <footer class="text-center text-xs text-warm-800/50 py-8">
+            &copy; いせっちハウス（スタッフ専用）
+        </footer>
+    </div>
+
+<script>
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        const icon = document.getElementById('menuIcon');
+        if (menu.classList.contains('hidden')) {
+            menu.classList.remove('hidden');
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-xmark');
+        } else {
+            menu.classList.add('hidden');
+            icon.classList.remove('fa-xmark');
+            icon.classList.add('fa-bars');
+        }
+    }
+</script>
+
+</body>
+</html>

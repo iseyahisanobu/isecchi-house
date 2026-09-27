@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スタッフ専用ポータル｜いせっちハウス</title>
+    <!-- 検索エンジンには表示させない（社外非公開ページ） -->
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" href="../画像素材/ロゴ_キャラクター/にわとりA_透過.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#F0FAE0', 100: '#DBF2B8', 700: '#6DBE45', 800: '#529433', 900: '#3E7226' },
+                        warm: { 50: '#FAFDF3', 800: '#2E3B22' },
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        heading: ['"Zen Maru Gothic"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Noto Sans JP', sans-serif; }
+        h1, h2, h3 { font-family: 'Zen Maru Gothic', sans-serif; }
+        /* 投稿・削除機能は管理権限者のみが使うため、通常は表示しない */
+        .admin-only { display: none; }
+        body.admin-mode .admin-only { display: flex; }
+        body.admin-mode button.admin-only { display: inline-flex; }
+    </style>
+</head>
+<body class="bg-warm-50 text-warm-800 min-h-screen md:flex">
+
+    <!-- サイドバー（PC） -->
+    <aside class="hidden md:flex md:flex-col md:w-60 md:shrink-0 bg-brand-700 text-white md:h-screen md:sticky md:top-0 md:overflow-y-auto">
+        <a href="index.html" class="block px-6 py-6 border-b border-brand-800">
+            <span class="block font-bold text-lg leading-snug">いせっちハウス</span>
+            <span class="block text-sm text-brand-50/80">スタッフ専用ポータル</span>
+        </a>
+        <nav class="flex-1 py-3">
+            <a href="rinen.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">「いせっち」の理念</a>
+            <a href="shift.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">シフト</a>
+            <a href="sesshikata.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">利用者との接し方</a>
+            <a href="chouri-shokuji.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">調理と食事提供</a>
+            <a href="gyomu-nagare.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">1日の業務の流れ</a>
+            <a href="care-all.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">ケアオールについて</a>
+            <a href="security.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">セキュリティ関連</a>
+            <a href="gomi-shori.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">ゴミ処理</a>
+            <div class="border-t border-brand-800 mx-6 my-3"></div>
+            <a href="riyousha-joho.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">
+                利用者情報
+                <span class="block text-[11px] font-normal text-amber-200 mt-0.5"><i class="fa-solid fa-triangle-exclamation"></i> 取り扱い要注意</span>
+            </a>
+        </nav>
+    </aside>
+
+    <div class="md:flex-1 md:min-w-0">
+
+        <!-- モバイル上部バー -->
+        <header class="md:hidden sticky top-0 z-40 bg-brand-700 text-white shadow-md">
+            <div class="flex items-center justify-between h-16 px-4">
+                <a href="index.html" class="font-bold leading-tight">
+                    いせっちハウス
+                    <span class="block text-[11px] font-normal text-brand-50/80">スタッフ専用ポータル</span>
+                </a>
+                <button onclick="toggleMobileMenu()" class="p-2" aria-label="メニュー">
+                    <i class="fa-solid fa-bars text-2xl" id="menuIcon"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- モバイルドロワー -->
+        <div id="mobileMenu" class="hidden md:hidden fixed inset-0 z-50">
+            <div class="absolute inset-0 bg-black/40" onclick="toggleMobileMenu()"></div>
+            <div class="absolute top-0 left-0 h-full w-72 max-w-[80%] bg-brand-700 text-white overflow-y-auto shadow-xl">
+                <div class="flex items-start justify-between px-6 py-6 border-b border-brand-800">
+                    <a href="index.html">
+                        <span class="block font-bold text-lg leading-snug">いせっちハウス</span>
+                        <span class="block text-sm text-brand-50/80">スタッフ専用ポータル</span>
+                    </a>
+                    <button onclick="toggleMobileMenu()" class="text-2xl leading-none" aria-label="閉じる">&times;</button>
+                </div>
+                <nav class="py-3">
+                    <a href="rinen.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">「いせっち」の理念</a>
+                    <a href="shift.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">シフト</a>
+                    <a href="sesshikata.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">利用者との接し方</a>
+                    <a href="chouri-shokuji.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">調理と食事提供</a>
+                    <a href="gyomu-nagare.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">1日の業務の流れ</a>
+                    <a href="care-all.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">ケアオールについて</a>
+                    <a href="security.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">セキュリティ関連</a>
+                    <a href="gomi-shori.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">ゴミ処理</a>
+                    <div class="border-t border-brand-800 mx-6 my-3"></div>
+                    <a href="riyousha-joho.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">
+                        利用者情報
+                        <span class="block text-xs font-normal text-amber-200 mt-0.5"><i class="fa-solid fa-triangle-exclamation"></i> 取り扱い要注意</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <main class="max-w-2xl mx-auto px-4 py-6 pb-10">
+
+            <p class="text-xs text-warm-800/50 mb-6 text-center">
+                このページは社外非公開です。URLの共有はご遠慮ください。
+            </p>
+
+            <!-- 掲示板：全体のお知らせ -->
+            <section class="mb-8">
+                <h2 class="text-lg font-bold text-brand-900 mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-thumbtack text-brand-700"></i> 全体のお知らせ
+                </h2>
+                <div id="generalList" class="space-y-3">
+                    <p class="text-sm text-warm-800/50 text-center py-4">読み込み中...</p>
+                </div>
+            </section>
+
+            <!-- 掲示板：その日のお知らせ（当日分がある時だけ表示） -->
+            <section id="dailySection" class="mb-8 hidden">
+                <h2 class="text-lg font-bold text-brand-900 mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-sun text-brand-700"></i> 今日のお知らせ
+                </h2>
+                <div id="dailyList" class="space-y-3"></div>
+            </section>
+
+        </main>
+
+        <footer id="footerTrigger" class="text-center text-xs text-warm-800/40 pb-16 pt-4 select-none">
+            &copy; いせっちハウス（スタッフ専用）
+        </footer>
+    </div>
+
+    <!-- 投稿ボタン：通常は非表示。管理権限者のみ表示（表示方法は下部の説明を参照） -->
+    <button id="openPostBtn"
+            class="admin-only fixed bottom-5 right-5 z-40 w-12 h-12 rounded-full bg-warm-800/80 text-white items-center justify-center shadow-lg active:scale-95 transition"
+            aria-label="投稿">
+        <i class="fa-solid fa-plus"></i>
+    </button>
+
+    <!-- 投稿フォーム -->
+    <div id="postModal" class="fixed inset-0 bg-black/40 hidden items-end sm:items-center justify-center z-50 p-0 sm:p-4">
+        <div class="bg-white w-full sm:max-w-md rounded-t-3xl sm:rounded-3xl p-6 max-h-[92vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-bold text-brand-900">お知らせを投稿</h3>
+                <button type="button" id="postClose" class="text-warm-800/40 text-2xl leading-none px-2" aria-label="閉じる">&times;</button>
+            </div>
+            <form id="postForm">
+                <div class="flex gap-2 mb-4">
+                    <label class="flex-1">
+                        <input type="radio" name="category" value="general" checked class="peer hidden">
+                        <div class="text-center py-3 rounded-xl border-2 border-brand-100 peer-checked:bg-brand-700 peer-checked:text-white peer-checked:border-brand-700 font-bold cursor-pointer transition">
+                            全体
+                        </div>
+                    </label>
+                    <label class="flex-1">
+                        <input type="radio" name="category" value="daily" class="peer hidden">
+                        <div class="text-center py-3 rounded-xl border-2 border-brand-100 peer-checked:bg-brand-700 peer-checked:text-white peer-checked:border-brand-700 font-bold cursor-pointer transition">
+                            今日だけ
+                        </div>
+                    </label>
+                </div>
+
+                <input type="text" name="title" placeholder="タイトル" required maxlength="60"
+                       class="w-full text-lg p-3 border-2 border-brand-100 rounded-xl mb-3 focus:outline-none focus:border-brand-700">
+
+                <textarea name="body" placeholder="内容" required rows="4" maxlength="500"
+                          class="w-full text-base p-3 border-2 border-brand-100 rounded-xl mb-2 focus:outline-none focus:border-brand-700"></textarea>
+
+                <p id="postError" class="text-red-600 text-sm mb-3 hidden">投稿に失敗しました。もう一度お試しください。</p>
+
+                <div class="flex gap-2">
+                    <button type="button" id="postCancel"
+                            class="flex-1 py-3 rounded-xl border-2 border-warm-800/20 font-bold">キャンセル</button>
+                    <button type="submit" id="postSubmitBtn"
+                            class="flex-1 py-3 rounded-xl bg-brand-700 text-white font-bold">投稿する</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 投稿用パスワード入力 -->
+    <div id="pinModal" class="fixed inset-0 bg-black/40 hidden items-center justify-center z-[60] p-4">
+        <div class="bg-white rounded-3xl p-6 w-full max-w-xs text-center">
+            <h3 class="font-bold text-brand-900 mb-1">パスワード</h3>
+            <p class="text-sm text-warm-800/70 mb-3">パスワードを入力してください</p>
+            <p id="pinError" class="text-red-600 text-sm mb-2 hidden">パスワードが違います</p>
+            <input id="pinInput" type="tel" maxlength="8" pattern="[0-9]{8}" inputmode="numeric"
+                   class="text-2xl tracking-[0.25em] text-center w-full p-3 border-2 border-brand-100 rounded-xl mb-4 focus:outline-none focus:border-brand-700">
+            <div class="flex gap-2">
+                <button type="button" id="pinCancel"
+                        class="flex-1 py-3 rounded-xl border-2 border-warm-800/20 font-bold">キャンセル</button>
+                <button type="button" id="pinSubmit"
+                        class="flex-1 py-3 rounded-xl bg-brand-700 text-white font-bold">確認</button>
+            </div>
+        </div>
+    </div>
+
+<script>
+    const API = 'api/announcements';
+    const POST_AUTH_API = 'api/post-auth';
+
+    // ---- ナビゲーション（モバイルドロワー開閉） ----
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        const icon = document.getElementById('menuIcon');
+        if (menu.classList.contains('hidden')) {
+            menu.classList.remove('hidden');
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-xmark');
+        } else {
+            menu.classList.add('hidden');
+            icon.classList.remove('fa-xmark');
+            icon.classList.add('fa-bars');
+        }
+    }
+
+    // ---- 管理権限者向け表示の切り替え ----
+    // フッターの表記を短い間に5回タップすると、投稿・削除ボタンが表示される。
+    // 実際の投稿・削除にはこの後さらにパスワード確認が必要なため、
+    // ここではあくまで「ボタンを目立たせない」ための表示切り替え。
+    (function () {
+        try {
+            if (sessionStorage.getItem('portal_admin_mode') === '1') {
+                document.body.classList.add('admin-mode');
+            }
+        } catch (e) { /* プライベートブラウジング等で使えない場合は無視 */ }
+    })();
+
+    let footerTapCount = 0;
+    let footerTapTimer = null;
+    document.getElementById('footerTrigger').addEventListener('click', () => {
+        footerTapCount++;
+        clearTimeout(footerTapTimer);
+        footerTapTimer = setTimeout(() => { footerTapCount = 0; }, 3000);
+        if (footerTapCount >= 5) {
+            footerTapCount = 0;
+            document.body.classList.add('admin-mode');
+            try { sessionStorage.setItem('portal_admin_mode', '1'); } catch (e) { /* 無視 */ }
+        }
+    });
+
+    function escapeHtml(str) {
+        return str.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+
+    function formatDate(iso) {
+        const d = new Date(iso + 'T00:00:00');
+        return `${d.getMonth() + 1}月${d.getDate()}日`;
+    }
+
+    function renderCard(a) {
+        const badge = a.category === 'general'
+            ? '<span class="inline-block text-xs font-bold text-brand-800 bg-brand-100 px-2 py-0.5 rounded-full">全体</span>'
+            : '<span class="inline-block text-xs font-bold text-white bg-brand-700 px-2 py-0.5 rounded-full">本日</span>';
+        return `
+            <div class="announcement-card bg-white rounded-2xl shadow-md p-4" data-id="${a.id}">
+                <div class="flex justify-between items-start gap-2">
+                    <div class="min-w-0">
+                        ${badge}
+                        <h3 class="font-bold text-warm-800 mt-1 break-words">${escapeHtml(a.title)}</h3>
+                        <p class="text-sm text-warm-800/80 mt-1 whitespace-pre-wrap break-words">${escapeHtml(a.body)}</p>
+                        <p class="text-xs text-warm-800/40 mt-2">${formatDate(a.createdAt)}</p>
+                    </div>
+                    <button class="delete-btn admin-only shrink-0 text-warm-800/30 p-2" aria-label="削除">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+                <div class="confirm-row hidden mt-3 flex gap-2 justify-end">
+                    <button class="cancel-delete text-sm px-3 py-1.5 rounded-lg border border-warm-800/20">キャンセル</button>
+                    <button class="confirm-delete text-sm px-3 py-1.5 rounded-lg bg-red-600 text-white">削除する</button>
+                </div>
+            </div>`;
+    }
+
+    function bindCardButtons() {
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.onclick = () => btn.closest('.announcement-card').querySelector('.confirm-row').classList.remove('hidden');
+        });
+        document.querySelectorAll('.cancel-delete').forEach(btn => {
+            btn.onclick = () => btn.closest('.confirm-row').classList.add('hidden');
+        });
+        document.querySelectorAll('.confirm-delete').forEach(btn => {
+            btn.onclick = async () => {
+                const card = btn.closest('.announcement-card');
+                const id = card.dataset.id;
+                btn.disabled = true;
+                btn.textContent = '削除中...';
+                const ok = await apiRequest('DELETE', `${API}?id=${encodeURIComponent(id)}`);
+                if (ok) {
+                    loadAnnouncements();
+                } else {
+                    btn.disabled = false;
+                    btn.textContent = '削除する';
+                }
+            };
+        });
+    }
+
+    async function loadAnnouncements() {
+        const generalList = document.getElementById('generalList');
+        const dailySection = document.getElementById('dailySection');
+        const dailyList = document.getElementById('dailyList');
+        try {
+            const res = await fetch(API);
+            if (!res.ok) throw new Error('failed');
+            const data = await res.json();
+            const general = data.filter(a => a.category === 'general');
+            const daily = data.filter(a => a.category === 'daily');
+
+            generalList.innerHTML = general.length
+                ? general.map(renderCard).join('')
+                : '<p class="text-sm text-warm-800/50 text-center py-4">お知らせはありません</p>';
+
+            if (daily.length) {
+                dailySection.classList.remove('hidden');
+                dailyList.innerHTML = daily.map(renderCard).join('');
+            } else {
+                dailySection.classList.add('hidden');
+                dailyList.innerHTML = '';
+            }
+            bindCardButtons();
+        } catch (e) {
+            generalList.innerHTML = '<p class="text-sm text-red-600 text-center py-4">読み込みに失敗しました。時間をおいて再度お試しください。</p>';
+        }
+    }
+
+    // ---- 投稿用パスワード（PIN）モーダル ----
+    let pinResolver = null;
+
+    function openPinModal() {
+        document.getElementById('pinError').classList.add('hidden');
+        document.getElementById('pinInput').value = '';
+        const modal = document.getElementById('pinModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.getElementById('pinInput').focus();
+    }
+    function closePinModal() {
+        const modal = document.getElementById('pinModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+    function waitForPin() {
+        openPinModal();
+        return new Promise(resolve => { pinResolver = resolve; });
+    }
+
+    document.getElementById('pinCancel').onclick = () => {
+        closePinModal();
+        if (pinResolver) { pinResolver(false); pinResolver = null; }
+    };
+
+    async function submitPin() {
+        const pin = document.getElementById('pinInput').value.trim();
+        const errEl = document.getElementById('pinError');
+        try {
+            const res = await fetch(POST_AUTH_API, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ pin })
+            });
+            if (res.ok) {
+                closePinModal();
+                if (pinResolver) { pinResolver(true); pinResolver = null; }
+            } else if (res.status === 429) {
+                errEl.textContent = 'しばらく時間をおいてから再度お試しください';
+                errEl.classList.remove('hidden');
+            } else {
+                errEl.textContent = 'パスワードが違います';
+                errEl.classList.remove('hidden');
+            }
+        } catch (e) {
+            errEl.textContent = '通信に失敗しました';
+            errEl.classList.remove('hidden');
+        }
+    }
+    document.getElementById('pinSubmit').onclick = submitPin;
+    document.getElementById('pinInput').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') submitPin();
+    });
+
+    async function apiRequest(method, url, body) {
+        const opts = { method };
+        if (body) {
+            opts.headers = { 'Content-Type': 'application/json' };
+            opts.body = JSON.stringify(body);
+        }
+        try {
+            let res = await fetch(url, opts);
+            if (res.status === 401) {
+                const authed = await waitForPin();
+                if (!authed) return false;
+                res = await fetch(url, opts);
+            }
+            return res.ok;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    // ---- 投稿フォーム ----
+    function openPostModal() {
+        const modal = document.getElementById('postModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.getElementById('postError').classList.add('hidden');
+    }
+    function closePostModal() {
+        const modal = document.getElementById('postModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.getElementById('postForm').reset();
+    }
+    document.getElementById('openPostBtn').onclick = openPostModal;
+    document.getElementById('postCancel').onclick = closePostModal;
+    document.getElementById('postClose').onclick = closePostModal;
+
+    document.getElementById('postForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const category = form.category.value;
+        const title = form.title.value.trim();
+        const body = form.body.value.trim();
+        if (!title || !body) return;
+
+        const submitBtn = document.getElementById('postSubmitBtn');
+        const errEl = document.getElementById('postError');
+        errEl.classList.add('hidden');
+        submitBtn.disabled = true;
+        submitBtn.textContent = '投稿中...';
+
+        const ok = await apiRequest('POST', API, { category, title, body });
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = '投稿する';
+
+        if (ok) {
+            closePostModal();
+            loadAnnouncements();
+        } else {
+            errEl.classList.remove('hidden');
+        }
+    });
+
+    loadAnnouncements();
+</script>
+
+</body>
+</html>

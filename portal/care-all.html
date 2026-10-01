@@ -40,11 +40,11 @@
             <span class="block text-sm text-brand-50/80">スタッフ専用ポータル</span>
         </a>
         <nav class="flex-1 py-3">
-            <a href="rinen.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">「いせっち」の理念</a>
+            <a href="rinen.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">「いせっち」の理念 <span class="text-red-300 text-xs">※準備中</span></a>
             <a href="shift.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">シフト</a>
-            <a href="sesshikata.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">利用者との接し方</a>
+            <a href="sesshikata.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">利用者との接し方 <span class="text-red-300 text-xs">※準備中</span></a>
             <a href="chouri-shokuji.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">調理と食事提供</a>
-            <a href="gyomu-nagare.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">1日の業務の流れ</a>
+            <a href="gyomu-nagare.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">1日の業務の流れ <span class="text-red-300 text-xs">※準備中</span></a>
             <a href="care-all.html" class="block px-6 py-3 text-sm font-medium bg-brand-800 transition">ケアオールについて</a>
             <a href="security.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">セキュリティ関連</a>
             <a href="gomi-shori.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">ゴミ処理</a>
@@ -83,11 +83,11 @@
                     <button onclick="toggleMobileMenu()" class="text-2xl leading-none" aria-label="閉じる">&times;</button>
                 </div>
                 <nav class="py-3">
-                    <a href="rinen.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">「いせっち」の理念</a>
+                    <a href="rinen.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">「いせっち」の理念 <span class="text-red-300 text-xs">※準備中</span></a>
                     <a href="shift.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">シフト</a>
-                    <a href="sesshikata.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">利用者との接し方</a>
+                    <a href="sesshikata.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">利用者との接し方 <span class="text-red-300 text-xs">※準備中</span></a>
                     <a href="chouri-shokuji.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">調理と食事提供</a>
-                    <a href="gyomu-nagare.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">1日の業務の流れ</a>
+                    <a href="gyomu-nagare.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">1日の業務の流れ <span class="text-red-300 text-xs">※準備中</span></a>
                     <a href="care-all.html" class="block px-6 py-3 text-base font-medium bg-brand-800">ケアオールについて</a>
                     <a href="security.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">セキュリティ関連</a>
                     <a href="gomi-shori.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">ゴミ処理</a>
@@ -101,13 +101,80 @@
         </div>
 
         <main class="max-w-2xl mx-auto px-4 py-8">
-            <h1 class="text-xl font-bold text-brand-900 mb-4">ケアオールについて</h1>
+            <h1 class="text-xl font-bold text-brand-900 mb-1">ケアオール入力方法</h1>
+            <p class="text-xs text-warm-800/50 mb-6">ピンクの初期画面から操作します。</p>
 
-            <div class="bg-white rounded-2xl shadow-md p-6">
-                <p class="text-warm-800/70">
-                    このページは準備中です。内容は追ってこちらに追加されます。
-                </p>
-            </div>
+            <!-- ① 個別入力 -->
+            <section class="bg-white rounded-2xl shadow-md p-6 mb-6">
+                <h2 class="font-bold text-brand-900 mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-user text-brand-700"></i> 個別入力
+                </h2>
+                <p class="text-warm-800/90 leading-relaxed mb-4">利用者名を選び、１人ずつ選ぶ。</p>
+
+                <div class="space-y-4">
+                    <div class="bg-brand-50 rounded-xl p-4">
+                        <p class="font-bold text-brand-900 mb-2">朝</p>
+                        <ul class="space-y-2 text-warm-800/90 text-sm leading-relaxed list-disc list-inside">
+                            <li>巡視（5時前）</li>
+                            <li>睡眠（起床時刻）</li>
+                            <li>バイタル（体温のみ）</li>
+                            <li>
+                                食事（朝食）　主食、副食の所持量を％表示（おおよそ）
+                                <ul class="pl-5 mt-1 space-y-1 list-disc list-inside text-warm-800/70">
+                                    <li>水分　味噌汁、スープ、マグカップのおおよその量をml表示</li>
+                                </ul>
+                            </li>
+                            <li>服薬（必要な人のみ）水分量も表示</li>
+                            <li>通所</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-brand-50 rounded-xl p-4">
+                        <p class="font-bold text-brand-900 mb-2">夕</p>
+                        <ul class="space-y-2 text-warm-800/90 text-sm leading-relaxed list-disc list-inside">
+                            <li>帰宅（帰宅時間）</li>
+                            <li>
+                                食事（夕食）　主食、副食の所持量を％表示（おおよそ）
+                                <ul class="pl-5 mt-1 space-y-1 list-disc list-inside text-warm-800/70">
+                                    <li>水分　味噌汁、スープ、マグカップのおおよその量をml表示</li>
+                                </ul>
+                            </li>
+                            <li>服薬（必要な人のみ）水分量も表示</li>
+                            <li>入浴</li>
+                            <li>巡視（0時頃）</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ② 業務日誌 -->
+            <section class="bg-white rounded-2xl shadow-md p-6">
+                <h2 class="font-bold text-brand-900 mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-book text-brand-700"></i> 業務日誌
+                </h2>
+                <p class="text-warm-800/90 leading-relaxed mb-1">画面をスクロールして、一番下の左側（これは10月から）。</p>
+                <p class="text-warm-800/90 leading-relaxed mb-4">夜勤者が当日中に入力する。</p>
+
+                <div class="bg-red-50 border border-red-200 rounded-xl p-4 mb-4 flex gap-2">
+                    <i class="fa-solid fa-triangle-exclamation text-red-600 mt-0.5 shrink-0"></i>
+                    <p class="text-red-700 text-sm leading-relaxed">「サービス利用状況」と「食事」は、自動入力されているので触らない。</p>
+                </div>
+
+                <ul class="space-y-3 text-warm-800/90 text-sm leading-relaxed">
+                    <li>
+                        <span class="font-bold text-warm-800">入力者：</span>
+                        右端の「ｖ」を押して自分の名前を入力する。
+                    </li>
+                    <li>
+                        <span class="font-bold text-warm-800">出勤者：</span>
+                        入力者と同じ方法で入力する。朝の出勤者、夜の出勤者の2名を入力→１人ずつゆっくり入力する。
+                    </li>
+                    <li>
+                        <span class="font-bold text-warm-800">連絡事項：</span>
+                        必要により入力する。特にない場合は「特になし」と記入する。
+                    </li>
+                </ul>
+            </section>
         </main>
 
         <footer class="text-center text-xs text-warm-800/50 py-8">

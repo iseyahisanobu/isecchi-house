@@ -12,6 +12,9 @@
 //        （どちらもコードには書かず、KVの値としてのみ保存する。
 //          変更したいときは、該当キーの値をCloudflareダッシュボードで書き換えるだけでよい）
 //      - キー "announcements" は自動的に使われるため、事前に用意する必要はありません
+//      - キー "page_riyousha_joho" / "page_security" … 個人情報・パスワードを含むため
+//        GitHubリポジトリ（Public）には置かず、この2ページの中身（HTML全文）をKVに直接保存する。
+//        該当ページへのアクセスはオリジン（GitHub Pages）へ転送せず、ここから配信する。
 //   2. Secret（環境変数） SESSION_SECRET を設定する（ログイン状態を保つ署名鍵。
 //      ランダムな長い文字列を1つ決めて設定すればよい。人に教える必要はない）
 //   3. このWorkerを、ポータル全体をカバーするRoute（例: isecchi.com/portal/*）に割り当てる
@@ -35,6 +38,12 @@ const POST_PIN_KEY = "post_pin";
 const ANNOUNCEMENTS_KEY = "announcements";
 const ANNOUNCEMENTS_PATH = "/portal/api/announcements";
 const POST_AUTH_PATH = "/portal/api/post-auth";
+
+// 個人情報・パスワードを含むため、GitHub（Public）には置かずKVから直接配信するページ
+const KV_PAGES = {
+  "/portal/riyousha-joho.html": "page_riyousha_joho",
+  "/portal/security.html": "page_security",
+};
 
 const MAX_ATTEMPTS = 10;
 const LOCK_DURATION_SECONDS = 30 * 60;      // ロック時間：30分
@@ -104,9 +113,28 @@ export default {
     if (url.pathname === POST_AUTH_PATH) {
       return handlePostAuthApi(request, env, ip);
     }
+    if (url.pathname in KV_PAGES) {
+      return handleKvPage(env, KV_PAGES[url.pathname]);
+    }
     return fetch(request); // 通常ページはそのままオリジンへ
   },
 };
+
+// ---- KVから直接配信するページ（個人情報・パスワードを含むもの） ----
+
+async function handleKvPage(env, kvKey) {
+  const html = await env.PORTAL_KV.get(kvKey);
+  if (!html) {
+    return new Response("このページは準備中です。", {
+      status: 200,
+      headers: { "Content-Type": "text/html; charset=UTF-8" },
+    });
+  }
+  return new Response(html, {
+    status: 200,
+    headers: { "Content-Type": "text/html; charset=UTF-8" },
+  });
+}
 
 // ---- お知らせAPI ----
 

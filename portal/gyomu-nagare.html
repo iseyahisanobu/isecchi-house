@@ -33,6 +33,11 @@
 </head>
 <body class="bg-warm-50 text-warm-800 min-h-screen md:flex">
 
+    <!-- 透かし：内容がまだ精査中であることを示す -->
+    <div class="pointer-events-none fixed inset-0 md:left-60 z-30 flex items-center justify-center overflow-hidden">
+        <span class="text-[22vw] md:text-[140px] font-black text-red-600/10 -rotate-[25deg] whitespace-nowrap select-none">精査中</span>
+    </div>
+
     <!-- サイドバー（PC） -->
     <aside class="hidden md:flex md:flex-col md:w-60 md:shrink-0 bg-brand-700 text-white md:h-screen md:sticky md:top-0 md:overflow-y-auto">
         <a href="index.html" class="block px-6 py-6 border-b border-brand-800">
@@ -40,11 +45,11 @@
             <span class="block text-sm text-brand-50/80">スタッフ専用ポータル</span>
         </a>
         <nav class="flex-1 py-3">
-            <a href="rinen.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">「いせっち」の理念</a>
+            <a href="rinen.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">「いせっち」の理念 <span class="text-red-300 text-xs">※準備中</span></a>
             <a href="shift.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">シフト</a>
-            <a href="sesshikata.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">利用者との接し方</a>
+            <a href="sesshikata.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">利用者との接し方 <span class="text-red-300 text-xs">※準備中</span></a>
             <a href="chouri-shokuji.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">調理と食事提供</a>
-            <a href="gyomu-nagare.html" class="block px-6 py-3 text-sm font-medium bg-brand-800 transition">1日の業務の流れ</a>
+            <a href="gyomu-nagare.html" class="block px-6 py-3 text-sm font-medium bg-brand-800 transition">1日の業務の流れ <span class="text-red-300 text-xs">※準備中</span></a>
             <a href="care-all.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">ケアオールについて</a>
             <a href="security.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">セキュリティ関連</a>
             <a href="gomi-shori.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">ゴミ処理</a>
@@ -83,11 +88,11 @@
                     <button onclick="toggleMobileMenu()" class="text-2xl leading-none" aria-label="閉じる">&times;</button>
                 </div>
                 <nav class="py-3">
-                    <a href="rinen.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">「いせっち」の理念</a>
+                    <a href="rinen.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">「いせっち」の理念 <span class="text-red-300 text-xs">※準備中</span></a>
                     <a href="shift.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">シフト</a>
-                    <a href="sesshikata.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">利用者との接し方</a>
+                    <a href="sesshikata.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">利用者との接し方 <span class="text-red-300 text-xs">※準備中</span></a>
                     <a href="chouri-shokuji.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">調理と食事提供</a>
-                    <a href="gyomu-nagare.html" class="block px-6 py-3 text-base font-medium bg-brand-800">1日の業務の流れ</a>
+                    <a href="gyomu-nagare.html" class="block px-6 py-3 text-base font-medium bg-brand-800">1日の業務の流れ <span class="text-red-300 text-xs">※準備中</span></a>
                     <a href="care-all.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">ケアオールについて</a>
                     <a href="security.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">セキュリティ関連</a>
                     <a href="gomi-shori.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">ゴミ処理</a>
@@ -101,12 +106,138 @@
         </div>
 
         <main class="max-w-2xl mx-auto px-4 py-8">
-            <h1 class="text-xl font-bold text-brand-900 mb-4">1日の業務の流れ</h1>
+            <h1 class="text-xl font-bold text-brand-900 mb-6">1日の業務の流れ</h1>
 
-            <div class="bg-white rounded-2xl shadow-md p-6">
-                <p class="text-warm-800/70">
-                    このページは準備中です。内容は追ってこちらに追加されます。
-                </p>
+            <!-- タイムライン -->
+            <div>
+
+                <!-- 16:30 出勤 -->
+                <div class="flex gap-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-4 h-4 rounded-full bg-brand-700 shrink-0 mt-1.5"></div>
+                        <div class="w-0.5 flex-1 bg-brand-200"></div>
+                    </div>
+                    <div class="pb-8 flex-1 min-w-0">
+                        <p class="font-bold text-brand-900 text-lg mb-2">16:30　出勤</p>
+                        <div class="bg-white rounded-2xl shadow-md p-4">
+                            <p class="text-warm-800/90 leading-relaxed mb-2">夕食準備、利用者の就労先の連絡票チェック、入浴への声かけなどを行う。</p>
+                            <ul class="space-y-1 text-warm-800/90 leading-relaxed list-disc list-inside">
+                                <li>ガスの元栓をオープン</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 19:00まで -->
+                <div class="flex gap-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-4 h-4 rounded-full bg-brand-700 shrink-0 mt-1.5"></div>
+                        <div class="w-0.5 flex-1 bg-brand-200"></div>
+                    </div>
+                    <div class="pb-8 flex-1 min-w-0">
+                        <p class="font-bold text-brand-900 text-lg mb-2">19:00　まで</p>
+                        <div class="bg-white rounded-2xl shadow-md p-4">
+                            <p class="text-warm-800/90 leading-relaxed mb-2">夕食の提供、利用者の食事の見守り、皿洗い。</p>
+                            <p class="text-warm-800/60 text-sm leading-relaxed">※皿洗い後はダブルチェック。必要に応じて2度目の洗いをし、乾燥の上、指定位置に片付け。</p>
+                            <p class="text-warm-800/60 text-sm leading-relaxed">※適宜、服薬案内をお願いします。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 21:30 -->
+                <div class="flex gap-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-4 h-4 rounded-full bg-brand-700 shrink-0 mt-1.5"></div>
+                        <div class="w-0.5 flex-1 bg-brand-200"></div>
+                    </div>
+                    <div class="pb-8 flex-1 min-w-0">
+                        <p class="font-bold text-brand-900 text-lg mb-2">21:30</p>
+                        <div class="bg-white rounded-2xl shadow-md p-4">
+                            <p class="text-warm-800/90 leading-relaxed">入浴の締め時間の声かけ。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 22:00 -->
+                <div class="flex gap-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-4 h-4 rounded-full bg-brand-700 shrink-0 mt-1.5"></div>
+                        <div class="w-0.5 flex-1 bg-brand-200"></div>
+                    </div>
+                    <div class="pb-8 flex-1 min-w-0">
+                        <p class="font-bold text-brand-900 text-lg mb-2">22:00</p>
+                        <div class="bg-white rounded-2xl shadow-md p-4">
+                            <p class="text-warm-800/90 leading-relaxed mb-3">消灯の声かけ。交流室は22:00以降は施錠。</p>
+                            <div class="bg-brand-50 rounded-xl p-4">
+                                <p class="font-bold text-brand-900 text-sm mb-2">【以降の業務】</p>
+                                <ul class="space-y-1.5 text-warm-800/90 text-sm leading-relaxed list-disc list-inside">
+                                    <li>アルコール除菌をお願いします（手すり、ドアノブなど各所）。</li>
+                                    <li>お風呂のカビ対策（壁に水かけなど）、排水口の清掃をお願いします。</li>
+                                    <li>トイレ清掃をお願いします。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 24:00〜25:00 -->
+                <div class="flex gap-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-4 h-4 rounded-full bg-brand-700 shrink-0 mt-1.5"></div>
+                        <div class="w-0.5 flex-1 bg-brand-200"></div>
+                    </div>
+                    <div class="pb-8 flex-1 min-w-0">
+                        <p class="font-bold text-brand-900 text-lg mb-2">24:00〜25:00</p>
+                        <div class="bg-white rounded-2xl shadow-md p-4">
+                            <p class="text-warm-800/90 leading-relaxed">巡回（1回目）をお願いします。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4:30〜5:00の間 -->
+                <div class="flex gap-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-4 h-4 rounded-full bg-brand-700 shrink-0 mt-1.5"></div>
+                        <div class="w-0.5 flex-1 bg-brand-200"></div>
+                    </div>
+                    <div class="pb-8 flex-1 min-w-0">
+                        <p class="font-bold text-brand-900 text-lg mb-2">4:30〜5:00　の間</p>
+                        <div class="bg-white rounded-2xl shadow-md p-4">
+                            <p class="text-warm-800/90 leading-relaxed">巡回（2回目）をお願いします。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7:00頃まで -->
+                <div class="flex gap-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-4 h-4 rounded-full bg-brand-700 shrink-0 mt-1.5"></div>
+                        <div class="w-0.5 flex-1 bg-brand-200"></div>
+                    </div>
+                    <div class="pb-8 flex-1 min-w-0">
+                        <p class="font-bold text-brand-900 text-lg mb-2">7:00　頃まで</p>
+                        <div class="bg-white rounded-2xl shadow-md p-4">
+                            <p class="text-warm-800/90 leading-relaxed mb-2">朝食の提供をお願いします。</p>
+                            <p class="text-warm-800/90 leading-relaxed">利用者が起きてきたら、体温測定および記録をお願いします（ケアールに記入）。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9:30 退勤（最後の項目：下に続く線なし） -->
+                <div class="flex gap-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-4 h-4 rounded-full bg-brand-700 shrink-0 mt-1.5"></div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-bold text-brand-900 text-lg mb-2">9:30　退勤</p>
+                        <div class="bg-white rounded-2xl shadow-md p-4">
+                            <ul class="space-y-1 text-warm-800/90 leading-relaxed list-disc list-inside">
+                                <li>ガスの元栓をクローズ</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </main>
 

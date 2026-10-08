@@ -103,7 +103,8 @@ export default {
         return renderPage(pinFormBody(true), 401);
       }
 
-      return renderPage(pinFormBody(false), 401);
+      // 200で返す：LINE等のリンクプレビュー用クローラーが401のページのサムネ情報を読まないことがあるため
+      return renderPage(pinFormBody(false), 200);
     }
 
     // ここから下は閲覧PIN認証済み
@@ -312,6 +313,13 @@ function renderPage(body, status) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>パスワード確認｜いせっちハウス</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="いせっちハウス">
+<meta property="og:title" content="いせっちハウス スタッフ専用ポータル">
+<meta property="og:description" content="スタッフ専用ページです。開くにはパスワードが必要です。">
+<meta property="og:image" content="https://isecchi.com/ogp/portal-ogp.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <style>
   body { font-family: sans-serif; background: #FAFDF3; display: flex; align-items: center;
          justify-content: center; min-height: 100vh; margin: 0; }

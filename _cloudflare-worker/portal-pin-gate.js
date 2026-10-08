@@ -317,7 +317,7 @@ function renderPage(body, status) {
 <meta property="og:site_name" content="いせっちハウス">
 <meta property="og:title" content="いせっちハウス スタッフ専用ポータル">
 <meta property="og:description" content="スタッフ専用ページです。開くにはパスワードが必要です。">
-<meta property="og:image" content="https://isecchi.com/ogp/portal-ogp.jpg">
+<meta property="og:image" content="https://isecchi.com/ogp/portal-ogp-v2.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <style>

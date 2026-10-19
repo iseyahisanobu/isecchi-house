@@ -19,6 +19,10 @@
 //      ランダムな長い文字列を1つ決めて設定すればよい。人に教える必要はない）
 //   3. このWorkerを、ポータル全体をカバーするRoute（例: isecchi.com/portal/*）に割り当てる
 //      （/portal/ 以下のどのページに直接アクセスしても、まずこの閲覧PIN画面が出るようになる）
+//   4. （レシート提出機能）Secret RECEIPT_GAS_URL と RECEIPT_TOKEN を設定する
+//      - RECEIPT_GAS_URL … Google Apps Script（_google-apps-script/receipt-upload.gs）のウェブアプリURL
+//      - RECEIPT_TOKEN   … 同スクリプトの setup 実行時に表示される合言葉
+//      （どちらもブラウザには一切送られない。スタッフのスマホからは /portal/api/receipt しか見えない）
 //
 // 【動作】
 //   - 未認証の場合：4桁の閲覧パスワード入力フォームを表示
@@ -30,6 +34,8 @@
 //     オリジンへ転送せず、この Worker が KV を使って直接お知らせの取得・投稿・削除を処理する
 //   - お知らせの投稿・削除には、閲覧パスワードとは別の「投稿用パスワード」の確認が必要
 //     （/portal/api/post-auth に4桁を送ると、以後12時間はCookieで再入力不要）
+//   - 閲覧認証済みの /portal/api/receipt 宛のPOST（レシート写真）は、合言葉を付けて
+//     Google Apps Script に中継し、Googleドライブに保存させる
 
 const COOKIE_NAME = "portal_auth";
 const POST_COOKIE_NAME = "portal_post_auth";
@@ -38,11 +44,14 @@ const POST_PIN_KEY = "post_pin";
 const ANNOUNCEMENTS_KEY = "announcements";
 const ANNOUNCEMENTS_PATH = "/portal/api/announcements";
 const POST_AUTH_PATH = "/portal/api/post-auth";
+const RECEIPT_PATH = "/portal/api/receipt";
+const RECEIPT_MAX_BODY_BYTES = 4 * 1024 * 1024; // 画像はスマホ側で約1.5MB以下に縮めてから送られる
 
 // 個人情報・パスワードを含むため、GitHub（Public）には置かずKVから直接配信するページ
 const KV_PAGES = {
   "/portal/riyousha-joho.html": "page_riyousha_joho",
   "/portal/security.html": "page_security",
+  "/portal/receipt.html": "page_receipt", // レシート提出（スタッフ氏名を含むため）
 };
 
 const MAX_ATTEMPTS = 10;
@@ -57,7 +66,7 @@ export default {
     const cookie = request.headers.get("Cookie") || "";
     const sessionToken = getCookieValue(cookie, COOKIE_NAME);
     const viewAuthed = sessionToken && (await isValidSession(sessionToken, env, "view"));
-    const isApiPath = url.pathname === ANNOUNCEMENTS_PATH || url.pathname === POST_AUTH_PATH;
+    const isApiPath = url.pathname === ANNOUNCEMENTS_PATH || url.pathname === POST_AUTH_PATH || url.pathname === RECEIPT_PATH;
 
     if (!viewAuthed) {
       if (isApiPath) {
@@ -78,16 +87,15 @@ export default {
         if (validPin && inputPin === validPin) {
           await env.PORTAL_KV.delete(`attempts:${ip}`);
           const token = await createSessionToken(env, "view");
-          const response = await fetch(request.url, {
-            method: "GET",
-            headers: request.headers,
+          // 同じURLへ303で移動し直す。ここでオリジンを直接取りに行くと、KV配信ページ（GitHubに無いページ）が404になる
+          return new Response(null, {
+            status: 303,
+            headers: {
+              Location: request.url,
+              "Cache-Control": "no-store",
+              "Set-Cookie": `${COOKIE_NAME}=${token}; Path=/; Max-Age=${SESSION_DURATION_SECONDS}; HttpOnly; Secure; SameSite=Lax`,
+            },
           });
-          const newResponse = new Response(response.body, response);
-          newResponse.headers.append(
-            "Set-Cookie",
-            `${COOKIE_NAME}=${token}; Path=/; Max-Age=${SESSION_DURATION_SECONDS}; HttpOnly; Secure; SameSite=Lax`
-          );
-          return newResponse;
         }
 
         const attemptsKey = `attempts:${ip}`;
@@ -108,11 +116,18 @@ export default {
     }
 
     // ここから下は閲覧PIN認証済み
+    // ログイン済みでPIN送信が再度届いた場合（二重送信・リロード）は405にせず、ページ表示へ戻す
+    if (request.method === "POST" && !isApiPath) {
+      return new Response(null, { status: 303, headers: { Location: request.url, "Cache-Control": "no-store" } });
+    }
     if (url.pathname === ANNOUNCEMENTS_PATH) {
       return handleAnnouncementsApi(request, env, ip);
     }
     if (url.pathname === POST_AUTH_PATH) {
       return handlePostAuthApi(request, env, ip);
+    }
+    if (url.pathname === RECEIPT_PATH) {
+      return handleReceiptApi(request, env);
     }
     if (url.pathname in KV_PAGES) {
       return handleKvPage(env, KV_PAGES[url.pathname]);
@@ -218,6 +233,67 @@ function jsonResponse(data, status) {
     status,
     headers: { "Content-Type": "application/json; charset=UTF-8" },
   });
+}
+
+// ---- レシート提出API（Google Apps Script への中継） ----
+
+async function handleReceiptApi(request, env) {
+  if (request.method !== "POST") {
+    return jsonResponse({ error: "method_not_allowed" }, 405);
+  }
+  if (!env.RECEIPT_GAS_URL || !env.RECEIPT_TOKEN) {
+    return jsonResponse({ ok: false, error: "not_configured" }, 503);
+  }
+  const length = parseInt(request.headers.get("Content-Length") || "0", 10);
+  if (length > RECEIPT_MAX_BODY_BYTES) {
+    return jsonResponse({ ok: false, error: "invalid_image" }, 413);
+  }
+
+  let body;
+  try {
+    body = await request.json();
+  } catch (e) {
+    return jsonResponse({ ok: false, error: "invalid_body" }, 400);
+  }
+  const payload = {
+    token: env.RECEIPT_TOKEN,
+    name: (body.name || "").toString(),
+    amount: Number(body.amount),
+    image: (body.image || "").toString(),
+    quality: (body.quality || "").toString().slice(0, 50),
+    note: (body.note || "").toString().slice(0, 100),
+    confirmed: body.confirmed === true, // 金額が合わないと言われたあと、本人が「合っている」と押した
+  };
+  if (payload.image.length > RECEIPT_MAX_BODY_BYTES) {
+    return jsonResponse({ ok: false, error: "invalid_image" }, 413);
+  }
+
+  try {
+    // Apps Script のウェブアプリは処理後に別URLへリダイレクトして結果を返すため、リダイレクトを追う
+    const res = await fetch(env.RECEIPT_GAS_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      redirect: "follow",
+    });
+    const text = await res.text();
+    let result;
+    try {
+      result = JSON.parse(text);
+    } catch (e) {
+      return jsonResponse({ ok: false, error: "upstream_error" }, 502);
+    }
+    if (result.error === "amount_mismatch") {
+      // レシートの読み取り結果と入力金額が合わない（まだ保存していない）。スタッフの画面で確認してもらう
+      return jsonResponse({ ok: false, error: "amount_mismatch", ocrTotal: result.ocrTotal || null }, 409);
+    }
+    if (!result.ok) {
+      return jsonResponse({ ok: false, error: result.error || "upstream_error" }, 502);
+    }
+    return jsonResponse({ ok: true, fileName: result.fileName, amount: result.amount, received: result.received }, 200);
+  } catch (e) {
+    return jsonResponse({ ok: false, error: "upstream_error" }, 502);
+  }
 }
 
 // ---- 投稿用パスワード認証 ----

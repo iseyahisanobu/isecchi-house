@@ -5,3 +5,10 @@ HP作成準備_2026-03-21/
 # （内容はCloudflare KVに直接保存し、Workerから配信する）
 portal/riyousha-joho.html
 portal/security.html
+portal/receipt.html
+
+# レシート提出の受け取り用スクリプト（スタッフ氏名を含むため）
+_google-apps-script/
+
+# 動作確認用の一時ファイル
+_tmp_test/

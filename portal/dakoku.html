@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>打刻（試験中）｜スタッフ専用</title>
+    <!-- 検索エンジンには表示させない（社外非公開ページ） -->
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" href="../画像素材/ロゴ_キャラクター/にわとりA_透過.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#F0FAE0', 100: '#DBF2B8', 700: '#6DBE45', 800: '#529433', 900: '#3E7226' },
+                        warm: { 50: '#FAFDF3', 800: '#2E3B22' }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        heading: ['"Zen Maru Gothic"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Noto Sans JP', sans-serif; }
+        h1, h2, h3 { font-family: 'Zen Maru Gothic', sans-serif; }
+        .step { display: none; }
+        .step.active { display: block; }
+        button:disabled { opacity: .5; }
+    </style>
+</head>
+<body class="bg-warm-50 text-warm-800 min-h-screen md:flex">
+
+    <!-- サイドバー（PC） -->
+    <aside class="hidden md:flex md:flex-col md:w-60 md:shrink-0 bg-brand-700 text-white md:h-screen md:sticky md:top-0 md:overflow-y-auto">
+        <a href="index.html" class="block px-6 py-6 border-b border-brand-800">
+            <span class="block font-bold text-lg leading-snug">いせっちハウス</span>
+            <span class="block text-sm text-brand-50/80">スタッフ専用ポータル</span>
+        </a>
+        <nav class="flex-1 py-3">
+            <a href="dakoku.html" class="block px-6 py-3 text-sm font-medium bg-brand-800 transition">打刻 <span class="text-red-300 text-xs">※試験中</span></a>
+            <a href="rinen.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">「いせっち」の理念 <span class="text-red-300 text-xs">※準備中</span></a>
+            <a href="shift.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">シフト</a>
+            <a href="receipt.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">レシート提出（立替）</a>
+            <a href="sesshikata.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">利用者との接し方 <span class="text-red-300 text-xs">※準備中</span></a>
+            <a href="chouri-shokuji.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">調理と食事提供</a>
+            <a href="gyomu-nagare.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">1日の業務の流れ <span class="text-red-300 text-xs">※準備中</span></a>
+            <a href="care-all.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">ケアオールについて</a>
+            <a href="security.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">セキュリティ関連</a>
+            <a href="gomi-shori.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">ゴミ処理</a>
+            <div class="border-t border-brand-800 mx-6 my-3"></div>
+            <a href="riyousha-joho.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">
+                利用者情報
+                <span class="block text-[11px] font-normal text-amber-200 mt-0.5"><i class="fa-solid fa-triangle-exclamation"></i> 取り扱い要注意</span>
+            </a>
+        </nav>
+    </aside>
+
+    <div class="md:flex-1 md:min-w-0">
+
+        <!-- モバイル上部バー -->
+        <header class="md:hidden sticky top-0 z-40 bg-brand-700 text-white shadow-md">
+            <div class="flex items-center justify-between h-16 px-4">
+                <a href="index.html" class="font-bold leading-tight">
+                    いせっちハウス
+                    <span class="block text-[11px] font-normal text-brand-50/80">スタッフ専用ポータル</span>
+                </a>
+                <button onclick="toggleMobileMenu()" class="p-2" aria-label="メニュー">
+                    <i class="fa-solid fa-bars text-2xl" id="menuIcon"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- モバイルドロワー -->
+        <div id="mobileMenu" class="hidden md:hidden fixed inset-0 z-50">
+            <div class="absolute inset-0 bg-black/40" onclick="toggleMobileMenu()"></div>
+            <div class="absolute top-0 left-0 h-full w-72 max-w-[80%] bg-brand-700 text-white overflow-y-auto shadow-xl">
+                <div class="flex items-start justify-between px-6 py-6 border-b border-brand-800">
+                    <a href="index.html">
+                        <span class="block font-bold text-lg leading-snug">いせっちハウス</span>
+                        <span class="block text-sm text-brand-50/80">スタッフ専用ポータル</span>
+                    </a>
+                    <button onclick="toggleMobileMenu()" class="text-2xl leading-none" aria-label="閉じる">&times;</button>
+                </div>
+                <nav class="py-3">
+                    <a href="dakoku.html" class="block px-6 py-3 text-base font-medium bg-brand-800">打刻 <span class="text-red-300 text-xs">※試験中</span></a>
+                    <a href="rinen.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">「いせっち」の理念 <span class="text-red-300 text-xs">※準備中</span></a>
+                    <a href="shift.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">シフト</a>
+                    <a href="receipt.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">レシート提出（立替）</a>
+                    <a href="sesshikata.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">利用者との接し方 <span class="text-red-300 text-xs">※準備中</span></a>
+                    <a href="chouri-shokuji.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">調理と食事提供</a>
+                    <a href="gyomu-nagare.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">1日の業務の流れ <span class="text-red-300 text-xs">※準備中</span></a>
+                    <a href="care-all.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">ケアオールについて</a>
+                    <a href="security.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">セキュリティ関連</a>
+                    <a href="gomi-shori.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">ゴミ処理</a>
+                    <div class="border-t border-brand-800 mx-6 my-3"></div>
+                    <a href="riyousha-joho.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">
+                        利用者情報
+                        <span class="block text-xs font-normal text-amber-200 mt-0.5"><i class="fa-solid fa-triangle-exclamation"></i> 取り扱い要注意</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <main class="max-w-xl mx-auto px-4 py-6 pb-12 text-lg">
+            <h1 class="text-2xl font-bold text-brand-900 mb-1">打刻<span class="ml-2 align-middle whitespace-nowrap text-sm font-bold text-red-600 bg-red-50 border border-red-300 rounded-full px-3 py-0.5">※試験中</span></h1>
+            <p class="text-sm text-warm-800/60 mb-5">出勤したとき、退勤するときに押してください。</p>
+
+            <!-- 読み込み中 -->
+            <section id="stepLoading" class="step active">
+                <div class="bg-white rounded-2xl shadow-md p-8 text-center">
+                    <i class="fa-solid fa-spinner fa-spin text-4xl text-brand-700"></i>
+                    <p class="text-lg mt-4">読み込んでいます…</p>
+                </div>
+            </section>
+
+            <!-- 読み込みに失敗 -->
+            <section id="stepLoadError" class="step">
+                <div class="bg-white rounded-2xl shadow-md p-6 text-center">
+                    <i class="fa-solid fa-triangle-exclamation text-4xl text-red-600"></i>
+                    <p id="loadErrorText" class="text-lg font-bold mt-3"></p>
+                    <button onclick="init()" class="mt-5 w-full bg-brand-700 hover:bg-brand-800 text-white font-bold text-xl rounded-xl py-4">
+                        もう一度ためす
+                    </button>
+                </div>
+            </section>
+
+            <!-- 名前を選ぶ -->
+            <section id="stepName" class="step">
+                <div class="bg-white rounded-2xl shadow-md p-5">
+                    <h2 class="text-xl font-bold text-brand-900 mb-4">あなたの名前を押してください</h2>
+                    <div id="nameButtons" class="grid grid-cols-2 gap-3"></div>
+                    <p class="text-sm text-warm-800/60 mt-4">次からは、このスマホが名前を覚えています。</p>
+                </div>
+            </section>
+
+            <!-- 出勤・退勤ボタン -->
+            <section id="stepMain" class="step">
+                <div class="flex items-center justify-between bg-brand-50 border border-brand-100 rounded-xl px-4 py-3 mb-5">
+                    <span><i class="fa-solid fa-user text-brand-700 mr-2"></i><b id="currentName"></b> さん</span>
+                    <button onclick="changeName()" class="text-sm text-brand-800 underline">名前を変える</button>
+                </div>
+                <div class="space-y-4">
+                    <button onclick="ask('in')" class="w-full bg-brand-700 hover:bg-brand-800 text-white font-bold text-3xl rounded-2xl py-8 shadow-md">
+                        <i class="fa-solid fa-right-to-bracket mr-3"></i>出勤
+                    </button>
+                    <button onclick="ask('out')" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-3xl rounded-2xl py-8 shadow-md">
+                        <i class="fa-solid fa-right-from-bracket mr-3"></i>退勤
+                    </button>
+                </div>
+                <p class="text-sm text-warm-800/60 mt-4">押すと、もう一度確認の画面が出ます。</p>
+            </section>
+
+            <!-- 確認 -->
+            <section id="stepConfirm" class="step">
+                <div class="bg-white rounded-2xl shadow-md p-6 text-center">
+                    <p id="confirmText" class="text-2xl font-bold leading-relaxed"></p>
+                    <button id="confirmYes" onclick="send()" class="mt-6 w-full text-white font-bold text-2xl rounded-2xl py-6 shadow-md"></button>
+                    <button onclick="cancelAsk()" class="mt-4 w-full bg-white border-2 border-brand-100 text-warm-800 font-bold text-lg rounded-xl py-3">
+                        いいえ
+                    </button>
+                </div>
+            </section>
+
+            <!-- 記録中 -->
+            <section id="stepSending" class="step">
+                <div class="bg-white rounded-2xl shadow-md p-8 text-center">
+                    <i class="fa-solid fa-spinner fa-spin text-5xl text-brand-700"></i>
+                    <p class="text-xl font-bold mt-4">記録しています…</p>
+                    <p class="text-base text-warm-800/60 mt-2">画面を閉じずにお待ちください</p>
+                </div>
+            </section>
+
+            <!-- 完了（10秒で自動的に閉じる） -->
+            <section id="stepDone" class="step">
+                <div class="bg-white rounded-2xl shadow-md p-8 text-center">
+                    <i class="fa-solid fa-circle-check text-6xl text-brand-700"></i>
+                    <p id="doneTitle" class="text-2xl font-bold mt-4"></p>
+                    <p id="doneDetail" class="text-2xl mt-3"></p>
+                    <p class="text-base text-warm-800/60 mt-4">この画面は <b id="countdown">10</b> 秒で自動的に閉じます</p>
+                    <button onclick="closeDone()" class="mt-5 w-full bg-brand-700 hover:bg-brand-800 text-white font-bold text-xl rounded-xl py-4">
+                        閉じる
+                    </button>
+                </div>
+            </section>
+
+            <!-- 失敗 -->
+            <section id="stepError" class="step">
+                <div class="bg-white rounded-2xl shadow-md p-6 text-center">
+                    <i class="fa-solid fa-triangle-exclamation text-5xl text-red-600"></i>
+                    <p class="text-xl font-bold mt-3">まだ記録できていません</p>
+                    <p id="errorText" class="text-base mt-3 leading-relaxed"></p>
+                    <button id="retryButton" onclick="send()" class="mt-5 w-full bg-brand-700 hover:bg-brand-800 text-white font-bold text-xl rounded-xl py-4">
+                        もう一度送る
+                    </button>
+                    <button onclick="cancelAsk()" class="mt-3 w-full bg-white border-2 border-brand-100 text-warm-800 font-bold text-lg rounded-xl py-3">
+                        もどる
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center text-xs text-warm-800/50 py-8">
+            &copy; いせっちハウス（スタッフ専用）
+        </footer>
+    </div>
+
+<script>
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        const icon = document.getElementById('menuIcon');
+        if (menu.classList.contains('hidden')) {
+            menu.classList.remove('hidden');
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-xmark');
+        } else {
+            menu.classList.add('hidden');
+            icon.classList.remove('fa-xmark');
+            icon.classList.add('fa-bars');
+        }
+    }
+
+    // ---- 設定 ----
+    const API_URL = '/portal/api/dakoku';
+    const NAME_KEY = 'dakoku_name';
+    const DONE_SECONDS = 10;
+    const LABEL = { in: '出勤', out: '退勤' };
+
+    let staff = [];
+    let pending = null;   // 確認中・送信中の操作 { type, id }
+    let doneTimer = null;
+
+    // ---- 端末に保存するのは名前だけ（打刻の記録は端末に残さない） ----
+    function load(key, fallback) {
+        try { const v = localStorage.getItem(key); return v === null ? fallback : JSON.parse(v); } catch (e) { return fallback; }
+    }
+    function save(key, value) {
+        try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) { /* 保存できなくても動作は続ける */ }
+    }
+
+    function showStep(id) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    function newId() {
+        if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+        return Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+    }
+
+    async function api(body) {
+        const res = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+        });
+        let data = {};
+        try { data = await res.json(); } catch (e) { /* JSON以外の応答 */ }
+        return { res, data };
+    }
+
+    function errorMessage(status, code) {
+        if (status === 401 && code === 'view_auth_required') return 'ログインの期限が切れました。ページを開き直して、パスワードを入れてから、もう一度ためしてください。';
+        if (code === 'invalid_name') return '名前が登録されていません。「もどる」を押して、名前を選び直してください。';
+        return '電波の良いところで、もう一度「もう一度送る」を押してください。';
+    }
+
+    // ---- 起動：名簿を読み込み、名前が決まっていれば出勤・退勤の画面へ ----
+    async function init() {
+        showStep('stepLoading');
+        try {
+            const { res, data } = await api({ action: 'staff' });
+            if (!res.ok || !data.ok || !Array.isArray(data.staff) || data.staff.length === 0) {
+                throw new Error(errorMessage(res.status, data.error));
+            }
+            staff = data.staff;
+        } catch (e) {
+            document.getElementById('loadErrorText').textContent = e.message && e.message !== 'Failed to fetch'
+                ? e.message : '読み込めませんでした。電波の良いところで、もう一度ためしてください。';
+            showStep('stepLoadError');
+            return;
+        }
+        const box = document.getElementById('nameButtons');
+        box.innerHTML = '';
+        staff.forEach(name => {
+            const b = document.createElement('button');
+            b.textContent = name;
+            b.className = 'bg-brand-50 hover:bg-brand-100 border-2 border-brand-100 rounded-xl py-4 font-bold text-lg';
+            b.onclick = () => { save(NAME_KEY, name); startMain(); };
+            box.appendChild(b);
+        });
+        const name = load(NAME_KEY, null);
+        if (name && staff.includes(name)) startMain(); else showStep('stepName');
+    }
+
+    function startMain() {
+        pending = null;
+        document.getElementById('currentName').textContent = load(NAME_KEY, '');
+        showStep('stepMain');
+    }
+    function changeName() { showStep('stepName'); }
+
+    // ---- 出勤・退勤ボタン → 確認 → 記録 ----
+    function ask(type) {
+        pending = { type, id: newId() };
+        const name = load(NAME_KEY, '');
+        document.getElementById('confirmText').textContent = name + 'さん、' + LABEL[type] + 'しますか？';
+        const yes = document.getElementById('confirmYes');
+        yes.textContent = 'はい、' + LABEL[type] + 'します';
+        yes.className = 'mt-6 w-full text-white font-bold text-2xl rounded-2xl py-6 shadow-md '
+            + (type === 'in' ? 'bg-brand-700 hover:bg-brand-800' : 'bg-orange-500 hover:bg-orange-600');
+        showStep('stepConfirm');
+    }
+    function cancelAsk() { startMain(); }
+
+    async function send() {
+        if (!pending) { startMain(); return; }
+        const { type, id } = pending;
+        const name = load(NAME_KEY, '');
+        showStep('stepSending');
+        try {
+            // 通信が途中で切れてやり直しても二重に記録されないよう、同じ操作には同じidを使う
+            const { res, data } = await api({ action: 'punch', name, type, id });
+            if (!res.ok || !data.ok) throw new Error(errorMessage(res.status, data.error));
+            showDone(type, name, data.time);
+        } catch (e) {
+            document.getElementById('errorText').textContent = e.message && e.message !== 'Failed to fetch'
+                ? e.message : errorMessage(0, '');
+            document.getElementById('retryButton').classList.toggle('hidden', e.message && e.message.indexOf('名前が登録されていません') === 0);
+            showStep('stepError');
+        }
+    }
+
+    function showDone(type, name, time) {
+        pending = null;
+        document.getElementById('doneTitle').textContent = LABEL[type] + 'を記録しました';
+        document.getElementById('doneDetail').textContent = name + 'さん　' + time;
+        let left = DONE_SECONDS;
+        const counter = document.getElementById('countdown');
+        counter.textContent = left;
+        showStep('stepDone');
+        clearInterval(doneTimer);
+        doneTimer = setInterval(() => {
+            left -= 1;
+            counter.textContent = Math.max(left, 0);
+            if (left <= 0) closeDone();
+        }, 1000);
+    }
+    function closeDone() {
+        clearInterval(doneTimer);
+        doneTimer = null;
+        startMain();
+    }
+
+    init();
+</script>
+
+</body>
+</html>

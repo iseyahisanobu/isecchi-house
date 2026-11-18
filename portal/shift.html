@@ -40,6 +40,7 @@
             <span class="block text-sm text-brand-50/80">スタッフ専用ポータル</span>
         </a>
         <nav class="flex-1 py-3">
+            <a href="dakoku.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">打刻 <span class="text-red-300 text-xs">※試験中</span></a>
             <a href="rinen.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">「いせっち」の理念 <span class="text-red-300 text-xs">※準備中</span></a>
             <a href="shift.html" class="block px-6 py-3 text-sm font-medium bg-brand-800 transition">シフト</a>
             <a href="receipt.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">レシート提出（立替）</a>
@@ -84,6 +85,7 @@
                     <button onclick="toggleMobileMenu()" class="text-2xl leading-none" aria-label="閉じる">&times;</button>
                 </div>
                 <nav class="py-3">
+                    <a href="dakoku.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">打刻 <span class="text-red-300 text-xs">※試験中</span></a>
                     <a href="rinen.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">「いせっち」の理念 <span class="text-red-300 text-xs">※準備中</span></a>
                     <a href="shift.html" class="block px-6 py-3 text-base font-medium bg-brand-800">シフト</a>
                     <a href="receipt.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">レシート提出（立替）</a>
@@ -105,13 +107,30 @@
         <main class="max-w-2xl mx-auto px-4 py-8">
             <h1 class="text-xl font-bold text-brand-900 mb-4">シフト</h1>
 
-            <div class="bg-white rounded-2xl shadow-md p-6">
-                <p class="font-bold text-warm-800 mb-4">いせっちハウス中町5丁目 シフト案（2026年9月11日作成）</p>
+            <div class="flex gap-3 mb-4">
+                <a href="#shift-202611" class="flex-1 text-center bg-brand-700 hover:bg-brand-800 text-white font-bold rounded-xl py-3">11月</a>
+                <a href="#shift-202612" class="flex-1 text-center bg-white border-2 border-brand-700 text-brand-800 font-bold rounded-xl py-3">12月（〜1/7）</a>
+            </div>
 
-                <img src="files/shift-20260911.png" alt="いせっちハウス中町5丁目 シフト案（2026年9月11日作成）"
+            <div id="shift-202611" class="bg-white rounded-2xl shadow-md p-6 mb-6 scroll-mt-20">
+                <p class="font-bold text-warm-800 mb-1">2026年11月</p>
+                <p class="text-sm text-warm-800/60 mb-4">2026年10月12日更新</p>
+
+                <img src="files/shift-202611.png" alt="いせっちハウス中町5丁目 シフト 2026年11月"
                      class="w-full rounded-xl border border-brand-100">
 
-                <a href="files/shift-20260911.pdf" target="_blank" rel="noopener"
+                <a href="files/shift-202611.pdf" target="_blank" rel="noopener"
+                   class="inline-block text-sm text-brand-700 underline mt-4">PDFでも見る</a>
+            </div>
+
+            <div id="shift-202612" class="bg-white rounded-2xl shadow-md p-6 scroll-mt-20">
+                <p class="font-bold text-warm-800 mb-1">2026年12月1日〜2027年1月7日</p>
+                <p class="text-sm text-warm-800/60 mb-4">2026年11月10日更新</p>
+
+                <img src="files/shift-202612.jpg" alt="いせっちハウス中町5丁目 シフト 2026年12月1日〜2027年1月7日"
+                     class="w-full rounded-xl border border-brand-100">
+
+                <a href="files/shift-202612.pdf" target="_blank" rel="noopener"
                    class="inline-block text-sm text-brand-700 underline mt-4">PDFでも見る</a>
             </div>
         </main>

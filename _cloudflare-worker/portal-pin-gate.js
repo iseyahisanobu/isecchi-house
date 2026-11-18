@@ -27,6 +27,9 @@
 //      - ATTENDANCE_GAS_URL … Google Apps Script（_google-apps-script/attendance.gs）のウェブアプリURL
 //      - ATTENDANCE_TOKEN   … 同スクリプトの setup 実行時に表示される合言葉
 //      （レシートと同じく、ブラウザには送られない。スマホからは /portal/api/dakoku しか見えない）
+//   6. （本日・明日の出勤者）KV のキー "shift_evening" に、日付ごとの夕勤・夜勤の名前を JSON で入れる
+//      （例：{"2026-11-03":["島本レイ子","島本香奈"], ...}。_tmp_test/make-shift-evening.mjs で作る）
+//      スタッフ氏名を含むため GitHub には置かない。/portal/api/today-staff は本日と明日の2日分だけを返す
 //
 // 【動作】
 //   - 未認証の場合：4桁の閲覧パスワード入力フォームを表示
@@ -51,6 +54,8 @@ const POST_AUTH_PATH = "/portal/api/post-auth";
 const RECEIPT_PATH = "/portal/api/receipt";
 const RECEIPT_MAX_BODY_BYTES = 4 * 1024 * 1024; // 画像はスマホ側で約1.5MB以下に縮めてから送られる
 const DAKOKU_PATH = "/portal/api/dakoku";
+const TODAY_STAFF_PATH = "/portal/api/today-staff";
+const SHIFT_EVENING_KEY = "shift_evening";
 
 // 個人情報・パスワードを含むため、GitHub（Public）には置かずKVから直接配信するページ
 const KV_PAGES = {
@@ -72,7 +77,7 @@ export default {
     const sessionToken = getCookieValue(cookie, COOKIE_NAME);
     const viewAuthed = sessionToken && (await isValidSession(sessionToken, env, "view"));
     const isApiPath = url.pathname === ANNOUNCEMENTS_PATH || url.pathname === POST_AUTH_PATH || url.pathname === RECEIPT_PATH
-      || url.pathname === DAKOKU_PATH;
+      || url.pathname === DAKOKU_PATH || url.pathname === TODAY_STAFF_PATH;
 
     if (!viewAuthed) {
       if (isApiPath) {
@@ -137,6 +142,9 @@ export default {
     }
     if (url.pathname === DAKOKU_PATH) {
       return handleDakokuApi(request, env);
+    }
+    if (url.pathname === TODAY_STAFF_PATH) {
+      return handleTodayStaffApi(request, env);
     }
     if (url.pathname in KV_PAGES) {
       return handleKvPage(env, KV_PAGES[url.pathname]);
@@ -303,6 +311,32 @@ async function handleReceiptApi(request, env) {
   } catch (e) {
     return jsonResponse({ ok: false, error: "upstream_error" }, 502);
   }
+}
+
+// ---- 本日・明日の出勤者（16:30から出勤する人）API ----
+// 日付の切り替わりは日本時間の0時。2日分だけを返し、シフト全体はブラウザに送らない
+
+async function handleTodayStaffApi(request, env) {
+  if (request.method !== "GET") {
+    return jsonResponse({ error: "method_not_allowed" }, 405);
+  }
+  let shift = {};
+  try {
+    shift = JSON.parse((await env.PORTAL_KV.get(SHIFT_EVENING_KEY)) || "{}") || {};
+  } catch (e) {
+    shift = {};
+  }
+  const jstNow = Date.now() + 9 * 60 * 60 * 1000;
+  const day = (offset) => {
+    const d = new Date(jstNow + offset * 24 * 60 * 60 * 1000);
+    const date = d.toISOString().slice(0, 10);
+    const names = Array.isArray(shift[date]) ? shift[date].map((n) => String(n)) : null;
+    return { date, weekday: d.getUTCDay(), names };
+  };
+  return new Response(JSON.stringify({ today: day(0), tomorrow: day(1) }), {
+    status: 200,
+    headers: { "Content-Type": "application/json; charset=UTF-8", "Cache-Control": "no-store" },
+  });
 }
 
 // ---- 打刻API（Google Apps Script への中継） ----

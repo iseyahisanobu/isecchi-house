@@ -29,6 +29,18 @@
     <style>
         body { font-family: 'Noto Sans JP', sans-serif; }
         h1, h2, h3 { font-family: 'Zen Maru Gothic', sans-serif; }
+        /* ケアオール記録手順（掲示物と同じ、中央ぞろえの縦の流れ） */
+        .flow p { margin: 0; line-height: 1.5; }
+        .flow b { font-size: 1.35rem; font-weight: 700; }
+        .flow small { font-size: .8rem; }
+        .flow .or { display: inline-block; margin: 0 .9rem; font-size: .9rem; }
+        .flow .note { font-size: .8rem; }
+        .flow .arrow { font-size: .9rem; color: #555; margin: .1rem 0 .3rem; }
+        .flow .side-box { border: 1px solid #333; font-size: .8rem; line-height: 1.7; text-align: left;
+                          padding: .5rem .75rem; margin: .75rem auto .25rem; max-width: 16rem; background: #fff; }
+        @media (min-width: 640px) {
+            .flow .side-box { position: absolute; left: calc(50% + 4.5rem); top: .2rem; margin: 0; width: 13rem; }
+        }
     </style>
 </head>
 <body class="bg-warm-50 text-warm-800 min-h-screen md:flex">
@@ -40,6 +52,7 @@
             <span class="block text-sm text-brand-50/80">スタッフ専用ポータル</span>
         </a>
         <nav class="flex-1 py-3">
+            <a href="dakoku.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">打刻 <span class="text-red-300 text-xs">※試験中</span></a>
             <a href="rinen.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">「いせっち」の理念 <span class="text-red-300 text-xs">※準備中</span></a>
             <a href="shift.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">シフト</a>
             <a href="receipt.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">レシート提出（立替）</a>
@@ -84,6 +97,7 @@
                     <button onclick="toggleMobileMenu()" class="text-2xl leading-none" aria-label="閉じる">&times;</button>
                 </div>
                 <nav class="py-3">
+                    <a href="dakoku.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">打刻 <span class="text-red-300 text-xs">※試験中</span></a>
                     <a href="rinen.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">「いせっち」の理念 <span class="text-red-300 text-xs">※準備中</span></a>
                     <a href="shift.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">シフト</a>
                     <a href="receipt.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">レシート提出（立替）</a>
@@ -103,79 +117,51 @@
         </div>
 
         <main class="max-w-2xl mx-auto px-4 py-8">
-            <h1 class="text-xl font-bold text-brand-900 mb-1">ケアオール入力方法</h1>
-            <p class="text-xs text-warm-800/50 mb-6">ピンクの初期画面から操作します。</p>
+            <h1 class="text-xl font-bold text-brand-900 mb-6">ケアオール入力方法</h1>
 
-            <!-- ① 個別入力 -->
-            <section class="bg-white rounded-2xl shadow-md p-6 mb-6">
-                <h2 class="font-bold text-brand-900 mb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-user text-brand-700"></i> 個別入力
-                </h2>
-                <p class="text-warm-800/90 leading-relaxed mb-4">利用者名を選び、１人ずつ選ぶ。</p>
+            <!-- ホームの壁に掲示している「ケアオール記録手順」（ホーム内掲示物\ケアオール記録手順.docx）と同じ内容・同じ並び -->
+            <section class="bg-white rounded-2xl shadow-md px-4 py-6 sm:p-8 text-center">
+                <h2 class="text-base sm:text-lg text-warm-800 mb-6">＜ケアオール記録手順（16:30～通し勤務時の流れ）＞</h2>
 
-                <div class="space-y-4">
-                    <div class="bg-brand-50 rounded-xl p-4">
-                        <p class="font-bold text-brand-900 mb-2">朝</p>
-                        <ul class="space-y-2 text-warm-800/90 text-sm leading-relaxed list-disc list-inside">
-                            <li>巡視（5時前）</li>
-                            <li>睡眠（起床時刻）</li>
-                            <li>バイタル（体温のみ）</li>
-                            <li>
-                                食事（朝食）　主食、副食の所持量を％表示（おおよそ）
-                                <ul class="pl-5 mt-1 space-y-1 list-disc list-inside text-warm-800/70">
-                                    <li>水分　味噌汁、スープ、マグカップのおおよその量をml表示</li>
-                                </ul>
-                            </li>
-                            <li>服薬（必要な人のみ）水分量も表示</li>
-                            <li>通所</li>
-                        </ul>
+                <div class="flow text-warm-800">
+                    <p><b>通所</b><small>（帰設）</small><span class="or">or</span><b>帰宅</b><small>（※土日など通所以外からの帰宅）</small></p>
+                    <p class="arrow">↓</p>
+                    <p><b>入浴</b></p>
+                    <p class="note">※実際のタイミング次第で。</p>
+                    <p class="arrow">↓</p>
+                    <p><b>食事</b><small>（夕飯）</small></p>
+                    <p class="arrow">↓</p>
+                    <p><b>服薬</b></p>
+                    <p class="note">※実際のタイミング次第で。</p>
+                    <p class="arrow">↓</p>
+                    <p><b>睡眠</b><small>（就寝）</small></p>
+                    <p class="arrow">↓</p>
+                    <div class="relative">
+                        <p><b>巡視</b><small> 1回目</small></p>
+                        <p class="arrow">↓</p>
+                        <p><b>巡視</b><small> 2回目</small></p>
+                        <!-- 掲示物では右横にある補足の枠（スマホでは巡視の下に出す） -->
+                        <div class="side-box">「外泊」、「日中支援」、「ヒヤリハット」などは状況に応じてご利用ください。</div>
                     </div>
-
-                    <div class="bg-brand-50 rounded-xl p-4">
-                        <p class="font-bold text-brand-900 mb-2">夕</p>
-                        <ul class="space-y-2 text-warm-800/90 text-sm leading-relaxed list-disc list-inside">
-                            <li>帰宅（帰宅時間）</li>
-                            <li>
-                                食事（夕食）　主食、副食の所持量を％表示（おおよそ）
-                                <ul class="pl-5 mt-1 space-y-1 list-disc list-inside text-warm-800/70">
-                                    <li>水分　味噌汁、スープ、マグカップのおおよその量をml表示</li>
-                                </ul>
-                            </li>
-                            <li>服薬（必要な人のみ）水分量も表示</li>
-                            <li>入浴</li>
-                            <li>巡視（0時頃）</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ② 業務日誌 -->
-            <section class="bg-white rounded-2xl shadow-md p-6">
-                <h2 class="font-bold text-brand-900 mb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-book text-brand-700"></i> 業務日誌
-                </h2>
-                <p class="text-warm-800/90 leading-relaxed mb-1">画面をスクロールして、一番下の左側（これは10月から）。</p>
-                <p class="text-warm-800/90 leading-relaxed mb-4">夜勤者が当日中に入力する。</p>
-
-                <div class="bg-red-50 border border-red-200 rounded-xl p-4 mb-4 flex gap-2">
-                    <i class="fa-solid fa-triangle-exclamation text-red-600 mt-0.5 shrink-0"></i>
-                    <p class="text-red-700 text-sm leading-relaxed">「サービス利用状況」と「食事」は、自動入力されているので触らない。</p>
+                    <p class="arrow">↓</p>
+                    <p><b>睡眠</b><small>（起床）</small></p>
+                    <p class="arrow">↓</p>
+                    <p><b>バイタル</b><small>（体温測定）</small></p>
+                    <p class="note">※体温測定は朝だけでOKです。</p>
+                    <p class="arrow">↓</p>
+                    <p><b>食事</b><small>（朝食）</small></p>
+                    <p class="arrow">↓</p>
+                    <p><b>通所</b><small>（出発）</small><span class="or">or</span><b>外出</b><small>（※土日など通所以外の外出）</small></p>
+                    <p class="arrow">↓</p>
                 </div>
 
-                <ul class="space-y-3 text-warm-800/90 text-sm leading-relaxed">
-                    <li>
-                        <span class="font-bold text-warm-800">入力者：</span>
-                        右端の「ｖ」を押して自分の名前を入力する。
-                    </li>
-                    <li>
-                        <span class="font-bold text-warm-800">出勤者：</span>
-                        入力者と同じ方法で入力する。朝の出勤者、夜の出勤者の2名を入力→１人ずつゆっくり入力する。
-                    </li>
-                    <li>
-                        <span class="font-bold text-warm-800">連絡事項：</span>
-                        必要により入力する。特にない場合は「特になし」と記入する。
-                    </li>
-                </ul>
+                <div class="bg-[#FFFF80] mx-auto max-w-md px-4 py-4 mt-1 text-sm leading-relaxed text-warm-800">
+                    <p>★★★重要★★★</p>
+                    <p><b class="text-xl font-bold">業務日誌</b>　の入力をお願いします。</p>
+                    <p>LINEワークスの申し送り内容との重複で構いません。</p>
+                    <p>入力者→ 自分の名前</p>
+                    <p>出勤者→ 前日夜勤者と、自分の名前</p>
+                </div>
             </section>
         </main>
 

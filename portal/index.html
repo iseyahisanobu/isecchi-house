@@ -119,6 +119,7 @@
                 <h2 class="text-lg font-bold text-brand-900 mb-3 flex items-center gap-2">
                     <i class="fa-solid fa-thumbtack text-brand-700"></i> 全体のお知らせ
                 </h2>
+                <div id="staffCard" class="hidden mb-3 bg-white border-2 border-brand-700 rounded-2xl shadow-md p-4"></div>
                 <div id="garbageCard" class="hidden mb-3 bg-brand-50 border-2 border-brand-700 rounded-2xl shadow-md p-4"></div>
                 <div id="generalList" class="space-y-3">
                     <p class="text-sm text-warm-800/50 text-center py-4">読み込み中...</p>
@@ -762,6 +763,46 @@
     }
     renderGarbage();
     setInterval(renderGarbage, 60 * 1000);
+
+    // ---- 本日・明日の出勤者（16:30から出勤する人。夕勤と夜勤の人を並べる）----
+    // 名前はスタッフ氏名を含むため、このファイルには書かず、ログイン後にサーバー（Cloudflare）から本日・明日の2日分だけを受け取る。
+    // 日付は日本時間の0時で切り替わる（開いたままでも、1分ごとに日付が変わっていないかを確かめて読み直す）。
+    const STAFF_API = '/portal/api/today-staff';
+    let staffShownFor = null;   // 表示中の「本日」の日付
+    function staffDayHtml(label, day) {
+        const [y, m, d] = day.date.split('-').map(Number);
+        const when = `${m}月${d}日（${'日月火水木金土'[day.weekday]}）`;
+        const names = day.names && day.names.length
+            ? day.names.map(n => `<span class="inline-block whitespace-nowrap bg-brand-50 border-2 border-brand-100 text-brand-900 font-bold rounded-xl px-3 py-1 mr-1 my-1 text-lg">${escapeHtml(String(n))}さん</span>`).join('')
+            : '<span class="text-base text-warm-800/60">シフト未登録</span>';
+        return `<div class="py-1"><p class="text-sm text-warm-800/70"><b class="text-warm-800">${label}</b>　${when}</p><div>${names}</div></div>`;
+    }
+    async function loadStaff() {
+        const card = document.getElementById('staffCard');
+        try {
+            const res = await fetch(STAFF_API, { cache: 'no-store' });
+            if (!res.ok) throw new Error('status ' + res.status);
+            const data = await res.json();
+            if (!data.today || !data.tomorrow) throw new Error('invalid');
+            card.innerHTML = '<p class="text-sm font-bold text-brand-800 mb-1"><i class="fa-solid fa-user-clock mr-1"></i>出勤者（16時30分から）</p>'
+                + staffDayHtml('本日', data.today)
+                + '<div class="border-t border-brand-100 my-1"></div>'
+                + staffDayHtml('明日', data.tomorrow);
+            staffShownFor = data.today.date;
+            card.classList.remove('hidden');
+        } catch (e) {
+            card.innerHTML = '<p class="text-sm text-warm-800/60">出勤者を読み込めませんでした。時間をおいて開き直してください。</p>';
+            staffShownFor = null;
+            card.classList.remove('hidden');
+        }
+    }
+    function staffDateChanged() {
+        const jstToday = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
+        return staffShownFor !== jstToday;
+    }
+    loadStaff();
+    setInterval(() => { if (staffDateChanged()) loadStaff(); }, 60 * 1000);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && staffDateChanged()) loadStaff(); });
 
     loadAnnouncements();
 </script>

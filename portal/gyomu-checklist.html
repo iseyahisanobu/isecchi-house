@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>業務チェックリスト｜スタッフ専用</title>
+    <!-- 検索エンジンには表示させない（社外非公開ページ） -->
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" href="../画像素材/ロゴ_キャラクター/にわとりA_透過.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#F0FAE0', 100: '#DBF2B8', 700: '#6DBE45', 800: '#529433', 900: '#3E7226' },
+                        warm: { 50: '#FAFDF3', 800: '#2E3B22' }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        heading: ['"Zen Maru Gothic"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Noto Sans JP', sans-serif; }
+        h1, h2, h3 { font-family: 'Zen Maru Gothic', sans-serif; }
+        /* チェックリスト */
+        .chk { display: flex; gap: .75rem; align-items: flex-start; padding: .7rem .25rem; border-top: 1px solid #EEF5E4; cursor: pointer; }
+        .chk:first-child { border-top: none; }
+        .chk.nochk { cursor: default; }
+        .mstep { display: none; }
+        .mstep.active { display: block; }
+        .namebtn.sel { background: #6DBE45; color: #fff; border-color: #6DBE45; }
+        .chk .nobox { flex: none; width: 1.6rem; height: 1.6rem; }
+        .chk input { appearance: none; -webkit-appearance: none; flex: none; width: 1.6rem; height: 1.6rem; margin-top: .05rem;
+                     border: 2px solid #6DBE45; border-radius: .45rem; background: #fff; display: grid; place-content: center; cursor: pointer; }
+        .chk input::after { content: ""; width: .55rem; height: .95rem; border: solid #fff; border-width: 0 .22rem .22rem 0;
+                            transform: rotate(45deg) translate(-.05rem, -.1rem); opacity: 0; }
+        .chk input:checked { background: #6DBE45; }
+        .chk input:checked::after { opacity: 1; }
+        .chk .label { font-weight: 700; line-height: 1.5; }
+        .chk .note { display: block; font-weight: 400; font-size: .85rem; color: rgba(46,59,34,.7); line-height: 1.6; margin-top: .1rem; }
+        .chk .label.red { color: #dc2626; }
+        .chk input:checked + span .label { color: rgba(46,59,34,.45); text-decoration: line-through; }
+    </style>
+</head>
+<body class="bg-warm-50 text-warm-800 min-h-screen md:flex">
+
+    <!-- サイドバー（PC） -->
+    <aside class="hidden md:flex md:flex-col md:w-60 md:shrink-0 bg-brand-700 text-white md:h-screen md:sticky md:top-0 md:overflow-y-auto">
+        <a href="index.html" class="block px-6 py-6 border-b border-brand-800">
+            <span class="block font-bold text-lg leading-snug">いせっちハウス</span>
+            <span class="block text-sm text-brand-50/80">スタッフ専用ポータル</span>
+        </a>
+        <nav class="flex-1 py-3">
+            <a href="dakoku.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">打刻</a>
+            <a href="receipt.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">レシート提出（立替）</a>
+            <a href="gyomu-checklist.html" class="block px-6 py-3 text-sm font-medium bg-brand-800 transition">業務チェックリスト</a>
+            <a href="rinen.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">「いせっち」の理念 <span class="text-red-300 text-xs">※準備中</span></a>
+            <a href="shift.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">シフト</a>
+            <a href="sesshikata.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">利用者との接し方 <span class="text-red-300 text-xs">※準備中</span></a>
+            <a href="chouri-shokuji.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">調理と食事提供</a>
+            <a href="care-all.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">ケアオールについて</a>
+            <a href="security.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">セキュリティ関連</a>
+            <a href="gomi-shori.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">ゴミ処理</a>
+            <div class="border-t border-brand-800 mx-6 my-3"></div>
+            <a href="riyousha-joho.html" class="block px-6 py-3 text-sm font-medium hover:bg-brand-800 transition">
+                利用者情報
+                <span class="block text-[11px] font-normal text-amber-200 mt-0.5"><i class="fa-solid fa-triangle-exclamation"></i> 取り扱い要注意</span>
+            </a>
+        </nav>
+    </aside>
+
+    <div class="md:flex-1 md:min-w-0">
+
+        <!-- モバイル上部バー -->
+        <header class="md:hidden sticky top-0 z-40 bg-brand-700 text-white shadow-md">
+            <div class="flex items-center justify-between h-16 px-4">
+                <a href="index.html" class="font-bold leading-tight">
+                    いせっちハウス
+                    <span class="block text-[11px] font-normal text-brand-50/80">スタッフ専用ポータル</span>
+                </a>
+                <button onclick="toggleMobileMenu()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border-2 border-white/80 bg-white/10 active:bg-white/25 font-bold text-base leading-none" aria-label="メニュー">
+                    <i class="fa-solid fa-bars text-lg" id="menuIcon"></i><span>メニュー</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- モバイルドロワー -->
+        <div id="mobileMenu" class="hidden md:hidden fixed inset-0 z-50">
+            <div class="absolute inset-0 bg-black/40" onclick="toggleMobileMenu()"></div>
+            <div class="absolute top-0 left-0 h-full w-72 max-w-[80%] bg-brand-700 text-white overflow-y-auto shadow-xl">
+                <div class="flex items-start justify-between px-6 py-6 border-b border-brand-800">
+                    <a href="index.html">
+                        <span class="block font-bold text-lg leading-snug">いせっちハウス</span>
+                        <span class="block text-sm text-brand-50/80">スタッフ専用ポータル</span>
+                    </a>
+                    <button onclick="toggleMobileMenu()" class="text-2xl leading-none" aria-label="閉じる">&times;</button>
+                </div>
+                <nav class="py-3">
+                    <a href="dakoku.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">打刻</a>
+                    <a href="receipt.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">レシート提出（立替）</a>
+                    <a href="gyomu-checklist.html" class="block px-6 py-3 text-base font-medium bg-brand-800">業務チェックリスト</a>
+                    <a href="rinen.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">「いせっち」の理念 <span class="text-red-300 text-xs">※準備中</span></a>
+                    <a href="shift.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">シフト</a>
+                    <a href="sesshikata.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">利用者との接し方 <span class="text-red-300 text-xs">※準備中</span></a>
+                    <a href="chouri-shokuji.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">調理と食事提供</a>
+                    <a href="care-all.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">ケアオールについて</a>
+                    <a href="security.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">セキュリティ関連</a>
+                    <a href="gomi-shori.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">ゴミ処理</a>
+                    <div class="border-t border-brand-800 mx-6 my-3"></div>
+                    <a href="riyousha-joho.html" class="block px-6 py-3 text-base font-medium hover:bg-brand-800">
+                        利用者情報
+                        <span class="block text-xs font-normal text-amber-200 mt-0.5"><i class="fa-solid fa-triangle-exclamation"></i> 取り扱い要注意</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <main class="max-w-2xl mx-auto px-4 py-8">
+            <h1 class="text-xl font-bold text-brand-900 mb-1">業務チェックリスト</h1>
+            <p class="text-sm text-warm-800 leading-relaxed mb-4">このチェックリストは、16:30～翌9:00までの勤務の流れを想定して作成しています。<br>勤務当日に対応不要な項目はチェックしなくてもOKです！</p>
+
+            <!-- 進み具合（チェックはこのスマホの中だけに残り、提出すると空に戻る） -->
+            <div class="sticky top-16 md:top-0 z-20 bg-warm-50/95 backdrop-blur py-2 mb-4">
+                <div class="flex items-center justify-between gap-3 text-sm">
+                    <span><b id="doneCount">0</b> / <span id="allCount">0</span> 完了</span>
+                    <button id="resetBtn" type="button" class="text-brand-800 underline">チェックをすべて外す</button>
+                </div>
+                <div class="h-2 bg-brand-100 rounded-full mt-1.5 overflow-hidden"><div id="bar" class="h-full bg-brand-700 rounded-full transition-all" style="width:0%"></div></div>
+            </div>
+
+            <!-- 前の勤務のチェックが提出されずに残っているとき -->
+            <div id="oldBanner" class="hidden mb-4 p-3 rounded-xl bg-amber-50 border border-amber-300 text-sm text-amber-900 leading-relaxed"></div>
+
+            <div id="list" class="space-y-5"></div>
+
+            <!-- 提出 -->
+            <div class="mt-6 bg-white rounded-2xl shadow-md p-4 text-center">
+                <p class="text-sm text-warm-800/70 mb-3">自分が行った項目にチェックを入れてから、提出してください。</p>
+                <button id="submitBtn" type="button" class="w-full py-4 rounded-xl bg-brand-700 text-white text-lg font-bold shadow active:scale-[.98] transition">
+                    <i class="fa-solid fa-paper-plane mr-2"></i>提出
+                </button>
+            </div>
+
+            <p class="text-xs text-warm-800/50 mt-6 leading-relaxed">
+                ※チェックは、提出するまでこのスマホ（ブラウザ）の中に残ります。ほかのページへ移っても、閉じても消えません。<br>
+                ※提出すると、記録が事務所に届き、このスマホのチェックは空に戻ります。<br>
+                ※2人で担当する日は、それぞれ自分が行った項目だけチェックして提出してください。
+            </p>
+        </main>
+
+        <footer class="text-center text-xs text-warm-800/50 py-8">
+            &copy; いせっちハウス（スタッフ専用）
+        </footer>
+    </div>
+
+    <!-- 提出の画面（名前 → 確認 → 送信中 → 完了／失敗） -->
+    <div id="modal" class="hidden fixed inset-0 z-50 bg-black/40 flex items-end sm:items-center justify-center p-3">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-xl p-5 max-h-[90vh] overflow-y-auto">
+            <div class="mstep" id="mName">
+                <h3 class="text-lg font-bold text-brand-900 mb-3">あなたの名前を選んでください</h3>
+                <div id="nameList" class="grid grid-cols-2 gap-2"></div>
+                <p id="nameMsg" class="text-sm text-red-600 mt-2"></p>
+                <button type="button" class="mt-4 w-full py-3 rounded-xl border border-warm-800/20 text-warm-800" data-close>やめる</button>
+            </div>
+            <div class="mstep" id="mConfirm">
+                <p class="text-center text-xl font-bold text-brand-900 mb-2"><span id="cName"></span>さん、<br>提出しますか？</p>
+                <p class="text-center text-sm text-warm-800/70 mb-1">勤務日：<span id="cDay"></span></p>
+                <p class="text-center text-sm text-warm-800/70 mb-1">チェック：<b id="cDone"></b> / <span id="cAll"></span></p>
+                <p id="cLeft" class="text-center text-sm text-amber-700 mb-1"></p>
+                <button type="button" id="changeName" class="block mx-auto text-sm text-brand-800 underline mb-4">名前を選び直す</button>
+                <div class="grid grid-cols-2 gap-3">
+                    <button type="button" class="py-4 rounded-xl border border-warm-800/20 text-lg font-bold text-warm-800" data-close>いいえ</button>
+                    <button type="button" id="yesBtn" class="py-4 rounded-xl bg-brand-700 text-white text-lg font-bold">はい</button>
+                </div>
+            </div>
+            <div class="mstep text-center" id="mSending">
+                <i class="fa-solid fa-spinner fa-spin text-3xl text-brand-700 my-4"></i>
+                <p class="font-bold text-brand-900">送っています…</p>
+            </div>
+            <div class="mstep text-center" id="mDone">
+                <i class="fa-solid fa-circle-check text-5xl text-brand-700 my-3"></i>
+                <p class="text-lg font-bold text-brand-900">提出しました</p>
+                <p class="text-2xl font-bold text-brand-800 my-4">今日もお疲れさまでした！</p>
+                <button type="button" class="w-full py-3 rounded-xl bg-brand-700 text-white font-bold" data-close>閉じる</button>
+            </div>
+            <div class="mstep text-center" id="mError">
+                <i class="fa-solid fa-triangle-exclamation text-4xl text-amber-500 my-3"></i>
+                <p class="font-bold text-brand-900 mb-2">提出できませんでした</p>
+                <p id="errMsg" class="text-sm text-warm-800/80 mb-4"></p>
+                <p class="text-xs text-warm-800/60 mb-4">チェックはこのスマホに残っています。</p>
+                <div class="grid grid-cols-2 gap-3">
+                    <button type="button" class="py-3 rounded-xl border border-warm-800/20 text-warm-800" data-close>閉じる</button>
+                    <button type="button" id="retryBtn" class="py-3 rounded-xl bg-brand-700 text-white font-bold">もう一度送る</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        const icon = document.getElementById('menuIcon');
+        if (menu.classList.contains('hidden')) {
+            menu.classList.remove('hidden');
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-xmark');
+        } else {
+            menu.classList.add('hidden');
+            icon.classList.remove('fa-xmark');
+            icon.classList.add('fa-bars');
+        }
+    }
+
+    // ---- チェックリストの中身（ここを書き換えれば、項目を足したり直したりできる） ----
+    // id はチェックの記録に使う名前（項目の文を直しても、id を変えなければチェックは残る）
+    const SECTIONS = [
+        { title: '出勤したら', icon: 'fa-door-open', items: [
+            { id: 'in-dakoku', nochk: true, label: '打刻（出勤）', note: 'ポータルの<a href="dakoku.html" class="text-brand-800 underline">「打刻」</a>から押します。' },
+            { id: 'in-post', label: '郵便ポスト確認' },
+            { id: 'in-hand', label: 'うがい、手洗い、アルコール手指消毒', red: true, note: '感染症対策を徹底してください！' },
+            { id: 'in-moushiokuri', label: '前日の申し送り確認', note: '申し送りがなければ不要' },
+            { id: 'in-sentaku', label: '洗濯物の確認 → 取り込み' },
+            { id: 'in-receipt', label: '買い物レシートの登録 → 回収BOXへ', note: 'ポータルの<a href="receipt.html" class="text-brand-800 underline">「レシート提出（立替）」</a>から登録します。' },
+            { id: 'in-pot', label: 'お湯ポットの補充' },
+            { id: 'in-air', label: '空気清浄機オン ＆ 加湿' },
+        ]},
+        { title: '利用者が帰ってきたら', icon: 'fa-house-user', items: [
+            { id: 'ret-note', label: '連絡ノートを受け取る', note: '※利用者による' },
+            { id: 'ret-bath', label: 'お風呂の順番調整', note: '入浴後の浴室を確認のうえ、次の人を呼ぶなど、調整してあげてください。' },
+        ]},
+        { title: '食事提供にあたって', icon: 'fa-utensils', items: [
+            { id: 'din-call', label: '食事の声かけ', note: '利用者さんも、唐突に「ご飯ですよ〜」と言われても戸惑います。何時ぐらいになりそうか、事前に伝えてあげてください。' },
+            { id: 'din-serve', label: '夕食の提供', note: '夕食の際は可能な限りみんな揃っていただきます。' },
+            { id: 'din-listen', label: '傾聴！', red: true, note: '利用者の安心感につながります。' },
+            { id: 'din-breakfast', label: '朝食 ＆ 自炊おにぎりの確認', note: '朝食の時間は、利用者の事情によって日々異なります。' },
+        ]},
+        { title: '書類への記入', icon: 'fa-file-pen', items: [
+            { id: 'doc-med', label: '服薬管理表' },
+            { id: 'doc-meal', label: '食事提供管理表' },
+            { id: 'doc-money', label: '金銭管理表', note: '※必要に応じて' },
+        ]},
+        { title: '風呂掃除', sub: '遅くとも22:30まで！', icon: 'fa-bath', items: [
+            { id: 'bath-drain', label: '排水溝のゴミ除去' },
+            { id: 'bath-clean', label: '浴槽、壁、床の清掃', note: 'カビ予防のため、全体が乾くまで換気扇はオン。' },
+        ]},
+        { title: '利用者の就寝中', icon: 'fa-moon', foot: '※備品庫の開閉等、物音がする作業は極力避けてください', items: [
+            { id: 'night-patrol1', label: '巡回（1回目）　24:00〜25:00' },
+            { id: 'night-patrol2', label: '巡回（2回目）　翌4:00〜5:00' },
+            { id: 'night-alcohol', label: '除菌（1回目）', note: 'アルコールスプレー＆ペーパーを使って、ドアノブ・手すりなど、みんなが触れるところを除菌。' },
+        ]},
+        { title: '起床後', icon: 'fa-sun', items: [
+            { id: 'am-temp', label: '体温測定', note: 'ケアオールに記録します（記録の流れは<a href="care-all.html" class="text-brand-800 underline">「ケアオールについて」</a>）。' },
+            { id: 'am-breakfast', label: '朝食の提供' },
+        ]},
+        { title: '朝やること', icon: 'fa-broom', items: [
+            { id: 'floor', label: '床掃除（掃除機かけ、水拭き）', note: '利用者の居室を除く全エリア（交流室、廊下、トイレ、洗面所、玄関 など）' },
+            { id: 'am-toilet', label: 'トイレ掃除', note: '洗剤、ペーパーなどで便器の拭き上げをお願いします。' },
+            { id: 'am-sink', label: '洗面台掃除' },
+            { id: 'am-alcohol', label: '除菌（2回目）', note: 'キッチン、ダイニングテーブル、ドアノブ、手すりなどなど、アルコールスプレーで拭き取り除菌をお願いします。' },
+        ]},
+        { title: '次のスタッフのために', icon: 'fa-hand-holding-heart', items: [
+            { id: 'next-refill', label: '洗剤、ペーパー、うがいコップ等の補充', note: 'キッチンやお風呂の洗剤、ペーパー類など、約1/3以下になったら補充してください。' },
+            { id: 'next-sofa', label: 'ソファベッド清掃', note: '髪の毛など落ちていませんか？ご確認ください。' },
+        ]},
+        { title: 'ゴミ出し', icon: 'fa-trash-can', items: [
+            { id: 'gomi-drain', label: 'キッチン排水口の掃除' },
+            { id: 'gomi-collect', label: '洗面所、トイレのゴミ回収' },
+            { id: 'gomi-call', label: '利用者への声かけ', note: 'ゴミ回収の日であれば' },
+            { id: 'gomi-out', label: 'ゴミ出し' },
+            { id: 'gomi-bag', label: '新しいゴミ袋のセット' },
+        ]},
+        { title: '退勤時チェックリストの確認', icon: 'fa-list-check', items: [
+            { id: 'out-kitchen', label: 'キッチン・水回り', note: '・ガスの元栓を閉める<br>・五徳を立てかける<br>・ポットのお湯を捨てる（※休日はそのままでOK）<br>・加湿器の水を捨てる<br>・給湯をOFFにする' },
+            { id: 'out-toilet', label: 'トイレ・洗面所', note: '・トイレットペーパーを補充<br>・うがいコップ補充<br>・ゴミを捨てる' },
+            { id: 'out-other', label: 'その他', note: '・換気扇・扇風機を止める（※必要に応じてつけたままでも可）' },
+            { id: 'out-lock', label: '施錠確認（最後にまとめて確認）', note: '・備品庫　・金庫　・書庫　・カギ庫（書庫の横）<br>・冷蔵庫　・キッチン下　・窓<br><span class="font-bold text-red-600">・最後に玄関の鍵をかける</span>' },
+            { id: 'out-dakoku', nochk: true, label: '打刻（退勤）', note: 'ポータルの<a href="dakoku.html" class="text-brand-800 underline">「打刻」</a>から押します。' },
+        ]},
+    ];
+
+    // ---- チェックの記録（このブラウザの中だけ。提出するまで残る） ----
+    // { started: 最初にチェックした時刻(ミリ秒), checks: { 項目id: 1 } }
+    const STORE_KEY = 'gyomu_checklist';
+    const NAME_KEY = 'dakoku_name';            // 打刻のページと同じ（選んだ名前を共有する）
+    const API_URL = '/portal/api/dakoku';
+    const WD = ['日', '月', '火', '水', '木', '金', '土'];
+
+    function loadState() {
+        try { const s = JSON.parse(localStorage.getItem(STORE_KEY) || 'null'); if (s && s.checks) return s; } catch (e) {}
+        return { started: null, checks: {} };
+    }
+    function loadChecks() { return loadState().checks; }
+    function saveChecks(c) {
+        const s = loadState();
+        const empty = Object.keys(c).length === 0;
+        const st = { started: empty ? null : (s.started || Date.now()), checks: c };
+        try { localStorage.setItem(STORE_KEY, JSON.stringify(st)); } catch (e) { /* 保存できなくても画面は使える */ }
+    }
+    // 勤務日：正午より前は前の日の勤務（打刻・勤務表と同じ決まり）
+    function workdayOf(ms) { return new Date(ms + 9 * 3600e3 - 12 * 3600e3).toISOString().slice(0, 10); }
+    function dayLabel(ymd) {
+        const d = new Date(ymd + 'T00:00:00Z');
+        return `${d.getUTCMonth() + 1}月${d.getUTCDate()}日（${WD[d.getUTCDay()]}）`;
+    }
+    function currentWorkday() { const s = loadState(); return workdayOf(s.started || Date.now()); }
+    function showOldBanner() {
+        const s = loadState(), el = document.getElementById('oldBanner');
+        if (s.started && workdayOf(s.started) !== workdayOf(Date.now())) {
+            el.innerHTML = `<i class="fa-solid fa-circle-exclamation mr-1"></i>前回の勤務（<b>${dayLabel(workdayOf(s.started))}</b>）のチェックが、まだ提出されていません。<br>前回の分なら「提出」を、不要なら「チェックをすべて外す」を押してください。`;
+            el.classList.remove('hidden');
+        } else el.classList.add('hidden');
+    }
+
+    function render() {
+        const checks = loadChecks();
+        const list = document.getElementById('list');
+        list.innerHTML = SECTIONS.map((s, si) => `
+            <section class="bg-white rounded-2xl shadow-md p-4">
+                <h2 class="font-bold text-brand-900 text-lg flex items-center gap-2 mb-1">
+                    <span class="w-8 h-8 rounded-full bg-brand-50 text-brand-700 grid place-content-center text-sm"><i class="fa-solid ${s.icon}"></i></span>
+                    ${s.title}${s.sub ? `<span class="ml-1 text-sm font-bold text-red-600">（${s.sub}）</span>` : ''}
+                </h2>
+                <div>${s.items.map(it => it.head ? `
+                    <div class="mt-3 mb-1 px-2 py-1 rounded-lg bg-brand-50 text-brand-800 text-sm font-bold">${it.head}</div>` : `
+                    <label class="chk${it.nochk ? ' nochk' : ''}">
+                        ${it.nochk ? '<span class="nobox"></span>' : `<input type="checkbox" data-id="${it.id}" ${checks[it.id] ? 'checked' : ''}>`}
+                        <span><span class="label${it.red ? ' red' : ''}">${it.label}</span>${it.note ? `<span class="note">${it.note}</span>` : ''}</span>
+                    </label>`).join('')}
+                </div>${s.foot ? `
+                <p class="mt-2 text-sm font-bold text-red-600">${s.foot}</p>` : ''}${s.bye ? `
+                <p class="mt-3 text-center text-xl font-bold text-brand-800">${s.bye}</p>` : ''}
+            </section>`).join('');
+        list.querySelectorAll('input[type=checkbox]').forEach(cb => cb.addEventListener('change', () => {
+            const c = loadChecks();
+            if (cb.checked) c[cb.dataset.id] = 1; else delete c[cb.dataset.id];
+            saveChecks(c);
+            updateCount();
+            showOldBanner();
+        }));
+        updateCount();
+        showOldBanner();
+    }
+    function updateCount() {
+        const all = document.querySelectorAll('#list input[type=checkbox]');
+        const done = [...all].filter(x => x.checked).length;
+        document.getElementById('doneCount').textContent = done;
+        document.getElementById('allCount').textContent = all.length;
+        document.getElementById('bar').style.width = (all.length ? Math.round(done / all.length * 100) : 0) + '%';
+    }
+    document.getElementById('resetBtn').addEventListener('click', () => {
+        if (!confirm('チェックをすべて外しますか？')) return;
+        saveChecks({}); render();
+    });
+
+    // ---- 提出 ----
+    let staff = [];
+    let selName = '';
+    let pendingId = null;      // 送信の受付ID（もう一度送るときも同じIDにして、二重に記録しない）
+
+    function showModal(step) {
+        document.getElementById('modal').classList.remove('hidden');
+        document.querySelectorAll('.mstep').forEach(s => s.classList.toggle('active', s.id === step));
+    }
+    function closeModal() { document.getElementById('modal').classList.add('hidden'); }
+    document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', closeModal));
+
+    async function api(body) {
+        const res = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        let data = {};
+        try { data = await res.json(); } catch (e) { /* JSON以外の応答 */ }
+        return { res, data };
+    }
+    function savedName() { try { return JSON.parse(localStorage.getItem(NAME_KEY) || 'null'); } catch (e) { return null; } }
+
+    async function openSubmit() {
+        if (!staff.length) {
+            showModal('mSending');
+            try {
+                const { res, data } = await api({ action: 'staff' });
+                if (!res.ok || !data.ok || !Array.isArray(data.staff)) throw new Error(res.status === 401 ? 'auth' : 'net');
+                staff = data.staff;
+            } catch (e) { return showError(e.message === 'auth'); }
+        }
+        const n = savedName();
+        if (n && staff.includes(n)) { selName = n; showConfirm(); } else showNames();
+    }
+    function showNames() {
+        document.getElementById('nameList').innerHTML = staff.map(n =>
+            `<button type="button" class="namebtn py-3 px-2 rounded-xl border border-brand-700/40 font-bold text-brand-900${n === selName ? ' sel' : ''}">${escapeHtml(n)}</button>`).join('');
+        document.querySelectorAll('#nameList .namebtn').forEach((b, i) => b.addEventListener('click', () => {
+            selName = staff[i];
+            try { localStorage.setItem(NAME_KEY, JSON.stringify(selName)); } catch (e) {}
+            showConfirm();
+        }));
+        showModal('mName');
+    }
+    function showConfirm() {
+        const all = document.querySelectorAll('#list input[type=checkbox]');
+        const done = [...all].filter(x => x.checked).length;
+        document.getElementById('cName').textContent = selName;
+        document.getElementById('cDay').textContent = dayLabel(currentWorkday());
+        document.getElementById('cDone').textContent = done;
+        document.getElementById('cAll').textContent = all.length;
+        document.getElementById('cLeft').textContent = done < all.length ? `チェックなし：${all.length - done}個` : '';
+        pendingId = null;
+        showModal('mConfirm');
+    }
+    function buildItems(checks) {
+        const out = [];
+        SECTIONS.forEach(s => s.items.forEach(it => {
+            if (it.head || it.nochk) return;
+            out.push({ id: it.id, section: s.title, label: it.label.replace(/<[^>]*>/g, ''), checked: !!checks[it.id] });
+        }));
+        return out;
+    }
+    async function send() {
+        if (!selName) return showNames();
+        const st = loadState();
+        if (!pendingId) pendingId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+        showModal('mSending');
+        try {
+            const { res, data } = await api({ action: 'checklist', id: pendingId, name: selName,
+                workday: workdayOf(st.started || Date.now()), items: buildItems(st.checks) });
+            if (res.status === 401) return showError(true);
+            if (!res.ok || !data.ok) return showError(false, data.error);
+            saveChecks({}); render(); pendingId = null;
+            showModal('mDone');
+        } catch (e) { showError(false); }
+    }
+    function showError(auth, code) {
+        document.getElementById('errMsg').textContent = auth
+            ? 'ログインの期限が切れました。ページを開き直して、パスワードを入れてから、もう一度ためしてください。'
+            : code === 'invalid_name' ? '名前が登録されていません。名前を選び直してください。'
+            : '電波の良いところで、「もう一度送る」を押してください。';
+        document.getElementById('retryBtn').onclick = code === 'invalid_name' ? showNames : (pendingId ? send : openSubmit);
+        showModal('mError');
+    }
+    function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+    document.getElementById('submitBtn').addEventListener('click', openSubmit);
+    document.getElementById('yesBtn').addEventListener('click', send);
+    document.getElementById('changeName').addEventListener('click', showNames);
+
+    // 別のタブやページで変わったときも、表示をそろえる
+    window.addEventListener('storage', e => { if (e.key === STORE_KEY) render(); });
+    window.addEventListener('pageshow', e => { if (e.persisted) render(); });
+    render();
+</script>
+
+</body>
+</html>

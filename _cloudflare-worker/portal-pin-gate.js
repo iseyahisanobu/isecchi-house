@@ -354,7 +354,7 @@ async function handleDakokuApi(request, env) {
   } catch (e) {
     return jsonResponse({ ok: false, error: "invalid_body" }, 400);
   }
-  const action = body.action === "punch" ? "punch" : body.action === "staff" ? "staff" : "";
+  const action = ["punch", "staff", "checklist"].includes(body.action) ? body.action : "";
   if (!action) {
     return jsonResponse({ ok: false, error: "invalid_action" }, 400);
   }
@@ -363,6 +363,18 @@ async function handleDakokuApi(request, env) {
     payload.name = (body.name || "").toString().slice(0, 40);
     payload.type = (body.type || "").toString().slice(0, 8);
     payload.id = (body.id || "").toString().slice(0, 64);
+  }
+  if (action === "checklist") {
+    // 業務チェックリストの提出（項目は100個まで、文字は短く切る）
+    payload.name = (body.name || "").toString().slice(0, 40);
+    payload.id = (body.id || "").toString().slice(0, 64);
+    payload.workday = (body.workday || "").toString().slice(0, 10);
+    payload.items = (Array.isArray(body.items) ? body.items : []).slice(0, 100).map((it) => ({
+      id: (it && it.id || "").toString().slice(0, 40),
+      section: (it && it.section || "").toString().slice(0, 60),
+      label: (it && it.label || "").toString().slice(0, 120),
+      checked: !!(it && it.checked),
+    }));
   }
   try {
     const res = await fetch(env.ATTENDANCE_GAS_URL, {
@@ -379,13 +391,16 @@ async function handleDakokuApi(request, env) {
     }
     if (!result.ok) {
       // 名前が名簿にないなどは、スマホの画面で案内できるよう 200 で返す
-      if (result.error === "invalid_name" || result.error === "invalid_type" || result.error === "invalid_id") {
+      if (["invalid_name", "invalid_type", "invalid_id", "invalid_workday", "invalid_items"].includes(result.error)) {
         return jsonResponse({ ok: false, error: result.error }, 200);
       }
       return jsonResponse({ ok: false, error: "upstream_error" }, 502);
     }
     if (action === "staff") {
       return jsonResponse({ ok: true, staff: Array.isArray(result.staff) ? result.staff : [] }, 200);
+    }
+    if (action === "checklist") {
+      return jsonResponse({ ok: true, duplicate: result.duplicate === true }, 200);
     }
     return jsonResponse({ ok: true, time: result.time, duplicate: result.duplicate === true }, 200);
   } catch (e) {
